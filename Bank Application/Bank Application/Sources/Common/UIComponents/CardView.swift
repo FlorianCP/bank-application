@@ -4,26 +4,34 @@ struct CardView: View {
     let card: Card
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(card.title)
-                .font(.headline)
-                .foregroundColor(.primary)
+        HStack(alignment: .center) {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(card.title)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                
+                Text(card.subtitle)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                
+                Text(card.description)
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(nil)
+                
+                Spacer(minLength: 8)
+                
+                Text(card.smallText)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
             
-            Text(card.subtitle)
-                .font(.subheadline)
+            Spacer()
+            
+            Image(systemName: "chevron.right")
                 .foregroundColor(.secondary)
-            
-            Text(card.description)
-                .font(.body)
-                .foregroundColor(.primary)
-                .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(nil)
-            
-            Spacer(minLength: 8)
-            
-            Text(card.smallText)
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .font(.system(size: 14, weight: .semibold))
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)

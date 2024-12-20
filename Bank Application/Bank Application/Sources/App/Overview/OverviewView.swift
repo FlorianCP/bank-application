@@ -100,10 +100,10 @@ struct OverviewView: View {
                                 CardView(card: card)
                             }
                         }
+                        .padding(.horizontal)
                         
                         Spacer()
                     }
-                    .padding(.horizontal)
                 }
                 .scrollIndicators(.hidden)
             }
