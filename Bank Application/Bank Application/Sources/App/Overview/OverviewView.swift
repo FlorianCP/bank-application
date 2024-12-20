@@ -7,59 +7,48 @@ struct OverviewView: View {
     // Sample cards data
     let cards = [
         Card(
-            title: "GIRO",
-            accountHolder: "Flo Privat",
-            iban: "AT59 3400 0000 0133 6254",
-            balance: 1728.97,
-            availableBalance: 1928.97
+            title: "Neue Funktionen",
+            subtitle: "Mobile Banking Update",
+            description: "Entdecken Sie unsere neuen Banking Features für noch mehr Komfort und Sicherheit in Ihrer Banken-App.",
+            smallText: "Jetzt erkunden"
         ),
         Card(
-            title: "SPARKONTO",
-            accountHolder: "Flo Sparen",
-            iban: "AT59 3400 0000 0133 6255",
-            balance: 15482.50,
-            availableBalance: 15482.50
+            title: "Sicherheitshinweis",
+            subtitle: "Wichtige Information",
+            description: "Aktuelle Informationen zu Sicherheitsmaßnahmen und wie Sie Ihr Konto optimal schützen können.",
+            smallText: "Mehr erfahren"
         ),
         Card(
-            title: "KREDITKARTE",
-            accountHolder: "Flo Kredit",
-            iban: "AT59 3400 0000 0133 6256",
-            balance: -523.42,
-            availableBalance: 4476.58
+            title: "Investment Tipp",
+            subtitle: "Finanzmarkt Update",
+            description: "Erhalten Sie Einblicke in aktuelle Markttrends und Anlagemöglichkeiten für Ihr Portfolio.",
+            smallText: "Details anzeigen"
         ),
         Card(
-            title: "INVESTMENT",
-            accountHolder: "Flo Invest",
-            iban: "AT59 3400 0000 0133 6257",
-            balance: 8234.91,
-            availableBalance: 8234.91
-        ),
-        Card(
-            title: "FAMILIENKONTO",
-            accountHolder: "Familie Privat",
-            iban: "AT59 3400 0000 0133 6258",
-            balance: 3567.82,
-            availableBalance: 3567.82
+            title: "Nachhaltiges Banking",
+            subtitle: "Umwelt & Finanzen",
+            description: "Erfahren Sie mehr über unsere nachhaltigen Bankprodukte und wie Sie mit Ihren Finanzen die Umwelt schützen können.",
+            smallText: "Mehr zum Thema"
         )
     ]
     
     // Sample news data
     let newsItems = [
         News(
-            title: "Neue Funktion für Mobilen Zahlung",
-            description: "Übertragen Sie Geld sofort an Ihre Freunde und Familie",
-            imageUrl: "payment_feature"
+            title: "Vielfältige Skills",
+            description: "Zukunftssicherheit für Ihr Unternehmen mit diesem Bewerber.",
+            image: "skills"
         ),
         News(
-            title: "Sicherheit Update",
-            description: "Wir haben unsere Sicherheitsmaßnahmen verbessert, um Ihr Konto zu schützen",
-            imageUrl: "security_update"
+            title: "Großer Erfahrungsschatz",
+            description: "Entdecken Sie die Projekterfahrung des Bewerbers.",
+            image: "experience"
         ),
         News(
-            title: "Investment Opportunities",
-            description: "Entdecken Sie neue Möglichkeiten, Ihr Vermögen zu vergrößern mit unseren Investment-Optionen",
-            imageUrl: "investment"
-        )
+            title: "Vorsorge für Ihr Unternehmen",
+            description: "Sorgen Sie jetzt vor, mit Florian Rath als Mitarbeiter.",
+            image: "profile_pic"
+        ),
     ]
     
     var body: some View {

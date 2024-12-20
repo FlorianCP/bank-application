@@ -5,44 +5,28 @@ struct CardView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(card.title)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    
-                    Text(card.accountHolder)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                
-                Spacer()
-                
-                Image(systemName: "qrcode.viewfinder")
-                    .font(.title2)
-                    .foregroundColor(.black)
-            }
+            Text(card.title)
+                .font(.headline)
+                .foregroundColor(.primary)
             
-            Text(card.iban)
-                .font(.system(.subheadline, design: .monospaced))
+            Text(card.subtitle)
+                .font(.subheadline)
                 .foregroundColor(.secondary)
             
-            Text(card.formattedBalance)
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(.green)
+            Text(card.description)
+                .font(.body)
+                .foregroundColor(.primary)
+                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(nil)
             
-            HStack {
-                Text("verfügbar")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                
-                Text(card.formattedAvailableBalance)
-                    .font(.subheadline)
-                    .foregroundColor(.primary)
-            }
+            Spacer(minLength: 8)
+            
+            Text(card.smallText)
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
         .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
@@ -51,11 +35,10 @@ struct CardView: View {
 
 #Preview {
     CardView(card: Card(
-        title: "GIRO",
-        accountHolder: "Flo Privat",
-        iban: "AT59 3400 0000 0133 6254",
-        balance: 1728.97,
-        availableBalance: 1928.97
+        title: "Example Title",
+        subtitle: "Example Subtitle",
+        description: "This is a longer description that can span multiple lines and provide more detailed information about the card content.",
+        smallText: "Additional information"
     ))
     .padding()
     .background(Color.gray.opacity(0.1))
