@@ -64,40 +64,53 @@ struct OverviewView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    // News ScrollView with paging
-                    TabView(selection: $currentPage) {
-                        ForEach(Array(newsItems.enumerated()), id: \.element.id) { index, news in
-                            NewsView(news: news)
-                                .tag(index)
+            ZStack {
+                // Background Image
+                Image("login_background")
+                    .resizable()
+                    .scaledToFill()
+                    .blur(radius: 20)
+                    .opacity(0.25)
+                    .ignoresSafeArea()
+                    .frame(width: UIScreen.main.bounds.width)
+                
+                // Content
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16) {
+                        // News ScrollView with paging
+                        TabView(selection: $currentPage) {
+                            ForEach(Array(newsItems.enumerated()), id: \.element.id) { index, news in
+                                NewsView(news: news)
+                                    .tag(index)
+                            }
                         }
-                    }
-                    .frame(height: 140)
-                    .tabViewStyle(.page(indexDisplayMode: .never))
-                    
-                    // Custom page indicator
-                    HStack {
+                        .frame(height: 140)
+                        .tabViewStyle(.page(indexDisplayMode: .never))
+                        
+                        // Custom page indicator
+                        HStack {
+                            Spacer()
+                            ForEach(0..<newsItems.count, id: \.self) { index in
+                                Circle()
+                                    .fill(currentPage == index ? Color.white : Color.gray.opacity(0.5))
+                                    .frame(width: 8, height: 8)
+                            }
+                            Spacer()
+                        }
+                        .padding(.top, -8)
+                        
+                        // Cards List
+                        VStack(spacing: 16) {
+                            ForEach(cards) { card in
+                                CardView(card: card)
+                            }
+                        }
+                        
                         Spacer()
-                        ForEach(0..<newsItems.count, id: \.self) { index in
-                            Circle()
-                                .fill(currentPage == index ? Color.ciYellowDarker : Color.gray.opacity(0.5))
-                                .frame(width: 8, height: 8)
-                        }
-                        Spacer()
-                    }
-                    .padding(.top, -8)
-                    
-                    // Cards List
-                    VStack(spacing: 16) {
-                        ForEach(cards) { card in
-                            CardView(card: card)
-                        }
                     }
                     .padding(.horizontal)
-                    
-                    Spacer()
                 }
+                .scrollIndicators(.hidden)
             }
             .navigationBarBackButtonHidden(true)
             .navigationTitle("Übersicht")
