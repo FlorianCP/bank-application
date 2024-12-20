@@ -26,21 +26,22 @@ In case of generating a commit message:
 - If you think there might not be a correct answer, you say so. If you do not know the answer, say so instead of guessing.
 
 Project structure:
-Bank Application/  # Root directory of the iOS application
-├── Sources/  # Main source code directory
-│   ├── App/  # App entry point and configuration
-│   ├── Modules/  # Feature-based modules
-│   │   ├── Feature1/  # Individual feature module
-│   │   │   ├── Feature1View.swift  # Main view
-│   │   │   ├── Feature1ViewModel.swift  # Business logic
-│   │   │   └── Components/  # Feature-specific components
-│   │   └── Feature2/  # Additional feature modules
-│   ├── Services/  # Core services layer, e.g. `NetworkService` or `StorageService`
-│   └── Common/  # Shared resources
-│       ├── UIComponents/  # Reusable UI components
-│       ├── Extensions/  # Swift extensions
-│       └── Resources/  # Assets and configs
-└── Tests/  # Test suite directory
+Bank Application/
+└──Bank Application/  # Root directory of the iOS application
+   ├── Sources/  # Main source code directory
+   │   ├── App/  # App entry point and configuration
+   │   ├── Modules/  # Feature-based modules
+   │   │   ├── Feature1/  # Individual feature module
+   │   │   │   ├── Feature1View.swift  # Main view
+   │   │   │   ├── Feature1ViewModel.swift  # Business logic
+   │   │   │   └── Components/  # Feature-specific components
+   │   │   └── Feature2/  # Additional feature modules
+   │   ├── Services/  # Core services layer, e.g. `NetworkService` or `StorageService`
+   │   └── Common/  # Shared resources
+   │       ├── UIComponents/  # Reusable UI components
+   │       ├── Extensions/  # Swift extensions
+   │       └── Resources/  # Assets and configs
+   └── Tests/  # Test suite directory
 
 SwiftUI UI Design Rules:
 Use Built-in Components: Utilize SwiftUI's native UI elements like List, NavigationView, TabView, and SF Symbols for a polished, iOS-consistent look.
