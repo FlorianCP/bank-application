@@ -97,7 +97,9 @@ struct OverviewView: View {
                         // Cards List
                         VStack(spacing: 16) {
                             ForEach(cards) { card in
-                                CardView(card: card)
+                                CardView(card: card) {
+                                    // Action for card
+                                }
                             }
                         }
                         .padding(.horizontal)

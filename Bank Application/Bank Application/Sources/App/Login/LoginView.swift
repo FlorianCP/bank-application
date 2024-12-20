@@ -80,6 +80,7 @@ struct LoginView: View {
                         .background(Color.ciYellow)
                         .foregroundColor(.black)
                 }
+                .cornerRadius(12.0)
                 
                 Button(action: {
                     showAlert = true

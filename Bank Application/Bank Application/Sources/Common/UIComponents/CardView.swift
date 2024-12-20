@@ -1,43 +1,61 @@
 import SwiftUI
 
+struct CustomCardButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            // .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .shadow(
+                color: Color.black.opacity(configuration.isPressed ? 0.3 : 0.1),
+                radius: configuration.isPressed ? 8 : 5,
+                x: 0,
+                y: configuration.isPressed ? 4 : 2
+            )
+            .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
+    }
+}
+
 struct CardView: View {
     let card: Card
+    var action: () -> Void = {}
     
     var body: some View {
-        HStack(alignment: .center) {
-            VStack(alignment: .leading, spacing: 12) {
-                Text(card.title)
-                    .font(.headline)
-                    .foregroundColor(.primary)
+        Button(action: action) {
+            HStack(alignment: .center) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(card.title)
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                    
+                    Text(card.subtitle)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    Text(card.description)
+                        .font(.body)
+                        .foregroundColor(.primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
+                    
+                    Spacer(minLength: 8)
+                    
+                    Text(card.smallText)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
                 
-                Text(card.subtitle)
-                    .font(.subheadline)
+                Spacer()
+                
+                Image(systemName: "chevron.right")
                     .foregroundColor(.secondary)
-                
-                Text(card.description)
-                    .font(.body)
-                    .foregroundColor(.primary)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .lineLimit(nil)
-                
-                Spacer(minLength: 8)
-                
-                Text(card.smallText)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .font(.system(size: 14, weight: .semibold))
             }
-            
-            Spacer()
-            
-            Image(systemName: "chevron.right")
-                .foregroundColor(.secondary)
-                .font(.system(size: 14, weight: .semibold))
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color.white)
+            .cornerRadius(12)
         }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .buttonStyle(CustomCardButtonStyle())
     }
 }
 
