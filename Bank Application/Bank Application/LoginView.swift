@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var showAlert = false
     @State private var showInfoAlert = false
+    @Binding var isLoggedIn: Bool
     
     var body: some View {
         VStack {
@@ -70,7 +71,7 @@ struct LoginView: View {
             // Login Buttons
             VStack(spacing: 15) {
                 Button(action: {
-                    // Login action
+                    isLoggedIn = true
                 }) {
                     Text("FLORIAN RATH'S BEWERBUNG ANSEHEN")
                         .fontWeight(.medium)
@@ -106,5 +107,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginView(isLoggedIn: .constant(false))
 }

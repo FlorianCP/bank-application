@@ -11,7 +11,7 @@ import SwiftUI
 struct Bank_ApplicationApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            RootView()
         }
     }
 }
