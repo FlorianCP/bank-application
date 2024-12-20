@@ -7,29 +7,35 @@ struct OverviewView: View {
     // Sample cards data
     let cards = [
         Card(
-            title: "Neue Funktionen",
-            subtitle: "Mobile Banking Update",
-            description: "Entdecken Sie unsere neuen Banking Features für noch mehr Komfort und Sicherheit in Ihrer Banken-App.",
-            smallText: "Jetzt erkunden"
-        ),
-        Card(
-            title: "Sicherheitshinweis",
-            subtitle: "Wichtige Information",
-            description: "Aktuelle Informationen zu Sicherheitsmaßnahmen und wie Sie Ihr Konto optimal schützen können.",
+            title: "Expertise",
+            subtitle: "Ein Überblick über meine Fähigkeiten",
+            description: "Erfahren Sie mehr über meine Expertise und Fähigkeiten.",
             smallText: "Mehr erfahren"
         ),
         Card(
-            title: "Investment Tipp",
-            subtitle: "Finanzmarkt Update",
-            description: "Erhalten Sie Einblicke in aktuelle Markttrends und Anlagemöglichkeiten für Ihr Portfolio.",
+            title: "Persönliche Werte",
+            subtitle: "Meine und Ihre Werte im Einklang",
+            description: "Erhalten Sie einen Überblick über meine Werte und wie diese mit Ihren übereinstimmen.",
             smallText: "Details anzeigen"
         ),
         Card(
-            title: "Nachhaltiges Banking",
-            subtitle: "Umwelt & Finanzen",
-            description: "Erfahren Sie mehr über unsere nachhaltigen Bankprodukte und wie Sie mit Ihren Finanzen die Umwelt schützen können.",
-            smallText: "Mehr zum Thema"
-        )
+            title: "Lebenslauf",
+            subtitle: "Mein Lebenslauf als PDF",
+            description: "Erfahren Sie mehr über mich indem Sie meinen Lebenslauf ansehen.",
+            smallText: "Zum Lebenslauf"
+        ),
+        Card(
+            title: "Profil und Projekterfahrung",
+            subtitle: "Mein Profil als PDF",
+            description: "Erhalten Sie einen Überblick über meine Projekte und Erfahrungen.",
+            smallText: "Zum Profil"
+        ),
+        Card(
+            title: "Persönliches",
+            subtitle: "Infos über meine Person",
+            description: "Erfahren Sie mehr über mich und meine persönliche Situation.",
+            smallText: "Überblick erhalten"
+        ),
     ]
     
     // Sample news data
