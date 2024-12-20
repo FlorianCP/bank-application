@@ -3,43 +3,56 @@ import SwiftUI
 struct OverviewView: View {
     @Binding var isLoggedIn: Bool
     @State private var currentPage = 0
+
+    private enum CardIdentifier: String {
+        case expertise
+        case values
+        case resume
+        case profile
+        case personal
+    }
     
     // Sample cards data
-    let cards = [
+    private let cards = [
         Card(
             title: "Expertise",
             subtitle: "Ein Überblick über meine Fähigkeiten",
             description: "Erfahren Sie mehr über meine Expertise und Fähigkeiten.",
-            smallText: "Mehr erfahren"
+            smallText: "Mehr erfahren",
+            identifier: CardIdentifier.expertise.rawValue
         ),
         Card(
             title: "Persönliche Werte",
             subtitle: "Meine und Ihre Werte im Einklang",
             description: "Erhalten Sie einen Überblick über meine Werte und wie diese mit Ihren übereinstimmen.",
-            smallText: "Details anzeigen"
+            smallText: "Details anzeigen",
+            identifier: CardIdentifier.values.rawValue
         ),
         Card(
             title: "Lebenslauf",
             subtitle: "Mein Lebenslauf als PDF",
             description: "Erfahren Sie mehr über mich indem Sie meinen Lebenslauf ansehen.",
-            smallText: "Zum Lebenslauf"
+            smallText: "Zum Lebenslauf",
+            identifier: CardIdentifier.resume.rawValue
         ),
         Card(
             title: "Profil und Projekterfahrung",
             subtitle: "Mein Profil als PDF",
             description: "Erhalten Sie einen Überblick über meine Projekte und Erfahrungen.",
-            smallText: "Zum Profil"
+            smallText: "Zum Profil",
+            identifier: CardIdentifier.profile.rawValue
         ),
         Card(
             title: "Persönliches",
             subtitle: "Infos über meine Person",
             description: "Erfahren Sie mehr über mich und meine persönliche Situation.",
-            smallText: "Überblick erhalten"
+            smallText: "Überblick erhalten",
+            identifier: CardIdentifier.personal.rawValue
         ),
     ]
     
     // Sample news data
-    let newsItems = [
+    private let newsItems = [
         News(
             title: "Vielfältige Skills",
             description: "Zukunftssicherheit für Ihr Unternehmen mit diesem Bewerber.",
@@ -97,8 +110,27 @@ struct OverviewView: View {
                         // Cards List
                         VStack(spacing: 16) {
                             ForEach(cards) { card in
-                                CardView(card: card) {
-                                    // Action for card
+                                CardView(card: card) { identifier in
+                                    guard let cardIdentifier = CardIdentifier(rawValue: identifier) else { return }
+                                    switch cardIdentifier {
+                                        case CardIdentifier.expertise:
+                                            // Action for card
+                                            break
+                                        case CardIdentifier.values:
+                                            // Action for card
+                                            break
+                                        case CardIdentifier.resume:
+                                            let url = URL(string: "https://www.rath.space/Lebenslauf.pdf")!
+                                            UIApplication.shared.open(url)
+                                            break
+                                        case CardIdentifier.profile:
+                                            let url = URL(string: "https://www.rath.space/Profil.pdf")!
+                                            UIApplication.shared.open(url)
+                                            break
+                                        case CardIdentifier.personal:
+                                            // Action for card
+                                            break
+                                    }
                                 }
                             }
                         }

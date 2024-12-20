@@ -16,10 +16,10 @@ struct CustomCardButtonStyle: ButtonStyle {
 
 struct CardView: View {
     let card: Card
-    var action: () -> Void = {}
+    var action: (String) -> Void = { _ in}
     
     var body: some View {
-        Button(action: action) {
+        Button(action: { action(card.identifier) }) {
             HStack(alignment: .center) {
                 VStack(alignment: .leading, spacing: 12) {
                     Text(card.title)
@@ -64,7 +64,8 @@ struct CardView: View {
         title: "Example Title",
         subtitle: "Example Subtitle",
         description: "This is a longer description that can span multiple lines and provide more detailed information about the card content.",
-        smallText: "Additional information"
+        smallText: "Additional information",
+        identifier: "example"
     ))
     .padding()
     .background(Color.gray.opacity(0.1))
