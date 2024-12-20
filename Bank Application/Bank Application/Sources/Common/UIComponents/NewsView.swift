@@ -1,12 +1,5 @@
 import SwiftUI
 
-struct News: Identifiable {
-    let id = UUID()
-    let title: String
-    let description: String
-    let imageUrl: String
-}
-
 struct NewsView: View {
     let news: News
     

@@ -43,6 +43,10 @@ Bank Application/
    │       └── Resources/  # Assets and configs
    └── Tests/  # Test suite directory
 
+Project specifics:
+- Variables, class names etc. should be in english.
+- All text and strings visible to the user should be in german.
+
 SwiftUI UI Design Rules:
 Use Built-in Components: Utilize SwiftUI's native UI elements like List, NavigationView, TabView, and SF Symbols for a polished, iOS-consistent look.
 

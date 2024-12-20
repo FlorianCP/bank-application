@@ -2,22 +2,23 @@ import SwiftUI
 
 struct OverviewView: View {
     @Binding var isLoggedIn: Bool
+    @State private var currentPage = 0
     
     // Sample news data
     let newsItems = [
         News(
-            title: "New Mobile Payment Feature",
-            description: "Transfer money instantly to your friends and family",
+            title: "Neue Funktion für Mobilen Zahlung",
+            description: "Übertragen Sie Geld sofort an Ihre Freunde und Familie",
             imageUrl: "payment_feature"
         ),
         News(
-            title: "Security Update",
-            description: "We've enhanced our security measures to protect your account",
+            title: "Sicherheit Update",
+            description: "Wir haben unsere Sicherheitsmaßnahmen verbessert, um Ihr Konto zu schützen",
             imageUrl: "security_update"
         ),
         News(
             title: "Investment Opportunities",
-            description: "Discover new ways to grow your wealth with our investment options",
+            description: "Entdecken Sie neue Möglichkeiten, Ihr Vermögen zu vergrößern mit unseren Investment-Optionen",
             imageUrl: "investment"
         )
     ]
@@ -25,22 +26,30 @@ struct OverviewView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 16) {
-                Text("Overview")
-                    .font(.largeTitle)
-                    .padding(.horizontal)
                 
-                // News ScrollView
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 16) {
-                        ForEach(newsItems) { news in
-                            NewsView(news: news)
-                        }
+                // News ScrollView with paging
+                TabView(selection: $currentPage) {
+                    ForEach(Array(newsItems.enumerated()), id: \.element.id) { index, news in
+                        NewsView(news: news)
+                            .tag(index)
                     }
-                    .padding(.horizontal)
-                    .padding([.top, .bottom], 8)
                 }
+                .frame(height: 140)
+                .tabViewStyle(.page(indexDisplayMode: .never))
                 
-                Text("Welcome to your application overview")
+                // Custom page indicator
+                HStack {
+                    Spacer()
+                    ForEach(0..<newsItems.count, id: \.self) { index in
+                        Circle()
+                            .fill(currentPage == index ? Color.ciYellowDarker : Color.gray.opacity(0.5))
+                            .frame(width: 8, height: 8)
+                    }
+                    Spacer()
+                }
+                .padding(.top, -8)
+                
+                Text("Willkommen in Ihrer Übersicht")
                     .foregroundColor(.secondary)
                     .padding(.horizontal)
                 
@@ -49,7 +58,7 @@ struct OverviewView: View {
                 Button(action: {
                     isLoggedIn = false
                 }) {
-                    Text("LOGOUT")
+                    Text("AUSLOGGEN")
                         .fontWeight(.medium)
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -61,6 +70,7 @@ struct OverviewView: View {
                 .padding(.bottom)
             }
             .navigationBarBackButtonHidden(true)
+            .navigationTitle("Übersicht")
         }
     }
 }
