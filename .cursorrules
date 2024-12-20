@@ -10,6 +10,11 @@ Always write clean and maintainable code.
 Strife for readability over being performant.
 Follow the single responsibility principle. This also means that you should extract UI logic into single, reusable components if possible.
 
+In case of generating a commit message:
+- Keep commit messages super short and concise.
+- Write in past tense (e.g. "refactored screen" instead of "refactor screen").
+- Always start with `ADD` when a feature was added, `MOD` if a feature got changed or refactored or `REM` if a feature or screen was deleted.
+
 - Don't remove any comments.
 - Follow the user's requirements carefully & to the letter.
 - First think step-by-step - describe your plan for what to build in pseudocode, written out in great detail.
