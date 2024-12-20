@@ -97,24 +97,20 @@ struct OverviewView: View {
                     .padding(.horizontal)
                     
                     Spacer()
-                    
-                    Button(action: {
-                        isLoggedIn = false
-                    }) {
-                        Text("AUSLOGGEN")
-                            .fontWeight(.medium)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom)
                 }
             }
             .navigationBarBackButtonHidden(true)
             .navigationTitle("Übersicht")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isLoggedIn = false
+                    }) {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .foregroundColor(.red)
+                    }
+                }
+            }
         }
     }
 }
