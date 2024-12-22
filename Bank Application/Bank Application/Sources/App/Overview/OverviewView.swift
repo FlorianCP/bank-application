@@ -3,6 +3,7 @@ import SwiftUI
 struct OverviewView: View {
     @Binding var isLoggedIn: Bool
     @State private var currentPage = 0
+    @State private var showingPersonalDetails = false
 
     private enum CardIdentifier: String {
         case expertise
@@ -71,7 +72,7 @@ struct OverviewView: View {
     ]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 // Background Image
                 Image("login_background")
@@ -122,14 +123,11 @@ struct OverviewView: View {
                                         case CardIdentifier.resume:
                                             let url = URL(string: "https://www.rath.space/Lebenslauf.pdf")!
                                             UIApplication.shared.open(url)
-                                            break
                                         case CardIdentifier.profile:
                                             let url = URL(string: "https://www.rath.space/Profil.pdf")!
                                             UIApplication.shared.open(url)
-                                            break
                                         case CardIdentifier.personal:
-                                            // Action for card
-                                            break
+                                            showingPersonalDetails = true
                                     }
                                 }
                             }
@@ -152,6 +150,9 @@ struct OverviewView: View {
                             .foregroundColor(.red)
                     }
                 }
+            }
+            .navigationDestination(isPresented: $showingPersonalDetails) {
+                PersonalDetailsViewControllerRepresentable()
             }
         }
     }
