@@ -15,9 +15,7 @@ final class PersonalDetailsViewController: UIViewController {
     // MARK: - Properties
     private let viewModel = PersonalDetailsViewModel()
     private let scrollView = UIScrollView()
-    private let avatarContainerView = UIView()
-    private let avatarImageView = UIImageView()
-    private let avatarImageShadowView = UIView()
+    private let avatarView = CircularAvatarView()
     private let contentStackView = UIStackView()
     private var cancellables = Set<AnyCancellable>()
     
@@ -30,42 +28,13 @@ final class PersonalDetailsViewController: UIViewController {
         view.layoutIfNeeded()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        updateAvatarImageStyling()
-    }
-
     // MARK: - Private
-    
-    private func updateAvatarImageStyling() {
-        let radius = viewModel.calculateAvatarCornerRadius(for: avatarImageView.bounds)
-        
-        // Apply corner radius directly to the layer
-        avatarImageView.layer.cornerRadius = radius
-        avatarImageView.layer.masksToBounds = true
-        
-        // Create container view for shadow
-        avatarImageView.clipsToBounds = true
-        
-        // Create a specific shadow path for better performance
-        let layer = CALayer()
-        let shadowPath = UIBezierPath(roundedRect: avatarImageView.bounds,
-                                     cornerRadius: radius).cgPath
-        
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 6)
-        layer.shadowRadius = 8
-        layer.shadowOpacity = 0.25
-        layer.shadowPath = shadowPath
-        avatarImageShadowView.layer.addSublayer(layer)
-    }
-    
     private func setupBindings() {
         // Bind avatar image
         viewModel.$avatarImage
             .receive(on: DispatchQueue.main)
             .sink { [weak self] image in
-                self?.avatarImageView.image = image
+                self?.avatarView.image = image
             }
             .store(in: &cancellables)
             
@@ -90,11 +59,9 @@ final class PersonalDetailsViewController: UIViewController {
         scrollView.addSubview(contentStackView)
         setupContentStackView()
 
-        // Add Avatar Image View
-        contentStackView.addArrangedSubview(avatarContainerView)
-        avatarContainerView.addSubview(avatarImageShadowView)
-        avatarContainerView.addSubview(avatarImageView)
-        setupAvatarImageView(avatarImageView, in: avatarContainerView, shadowView: avatarImageShadowView)
+        // Add Avatar View
+        contentStackView.addArrangedSubview(avatarView)
+        setupAvatarView()
     }
     
     private func setupScrollView(_ scrollView: UIScrollView, in view: UIView) {
@@ -108,25 +75,13 @@ final class PersonalDetailsViewController: UIViewController {
         ])
     }
 
-    private func setupAvatarImageView(_ imageView: UIImageView, in containerView: UIView, shadowView: UIView) {
-        // TODO: 2024-12-21 flr: Remove background color
-        imageView.backgroundColor = .red
-        imageView.contentMode = .scaleAspectFit
+    private func setupAvatarView() {
+        avatarView.translatesAutoresizingMaskIntoConstraints = false
         
-        shadowView.translatesAutoresizingMaskIntoConstraints = false
-        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        print("Constraints: \(avatarImageView.constraints)")
         NSLayoutConstraint.activate([
-            avatarImageView.widthAnchor.constraint(equalToConstant: viewModel.avatarWidth),
-            avatarImageView.heightAnchor.constraint(equalToConstant: viewModel.avatarWidth),
-            avatarImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-
-            containerView.heightAnchor.constraint(equalTo: avatarImageView.heightAnchor),
-            
-            shadowView.topAnchor.constraint(equalTo: imageView.topAnchor),
-            shadowView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
-            shadowView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
-            shadowView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor)
+            avatarView.widthAnchor.constraint(equalToConstant: viewModel.avatarWidth),
+            avatarView.heightAnchor.constraint(equalToConstant: viewModel.avatarWidth),
+            avatarView.centerXAnchor.constraint(equalTo: contentStackView.centerXAnchor)
         ])
     }
 
@@ -165,7 +120,7 @@ final class PersonalDetailsViewController: UIViewController {
     private func setupSections(_ sections: [PersonalSection]) {
         // Remove existing section views
         contentStackView.arrangedSubviews
-            .filter { $0 != avatarImageView && $0 != avatarContainerView }
+            .filter { $0 != avatarView }
             .forEach { $0.removeFromSuperview() }
         
         // Add new section views
