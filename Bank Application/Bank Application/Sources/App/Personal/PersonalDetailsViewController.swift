@@ -19,6 +19,13 @@ final class PersonalDetailsViewController: UIViewController {
     private let contentStackView = UIStackView()
     private var cancellables = Set<AnyCancellable>()
     
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "login_background"))
+        imageView.contentMode = .scaleAspectFill
+        imageView.alpha = 0.25
+        return imageView
+    }()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +58,9 @@ final class PersonalDetailsViewController: UIViewController {
         title = "Persönliches"
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        // Add Background Image View
+        setupBackgroundImageView()
+        
         // Add ScrollView
         view.addSubview(scrollView)
         setupScrollView(scrollView, in: view)
@@ -62,6 +72,27 @@ final class PersonalDetailsViewController: UIViewController {
         // Add Avatar View
         contentStackView.addArrangedSubview(avatarView)
         setupAvatarView()
+    }
+    
+    private func setupBackgroundImageView() {
+        // Add background image view
+        view.addSubview(backgroundImageView)
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        // Add blur effect
+        let blurEffect = UIBlurEffect(style: .light)
+//        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        let blurEffectView = UIVisualEffectView(effect: vibrancyEffect)
+        blurEffectView.frame = backgroundImageView.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backgroundImageView.addSubview(blurEffectView)
     }
     
     private func setupScrollView(_ scrollView: UIScrollView, in view: UIView) {
@@ -79,7 +110,6 @@ final class PersonalDetailsViewController: UIViewController {
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            avatarView.widthAnchor.constraint(equalToConstant: viewModel.avatarWidth),
             avatarView.heightAnchor.constraint(equalToConstant: viewModel.avatarWidth),
             avatarView.centerXAnchor.constraint(equalTo: contentStackView.centerXAnchor)
         ])

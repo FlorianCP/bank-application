@@ -1,6 +1,6 @@
 import UIKit
 
-final class UICardView: UIView {
+final class UICardView: UIControl {
     // MARK: - Properties
     private let card: Card
     private var action: ((String) -> Void)?
@@ -37,10 +37,14 @@ final class UICardView: UIView {
         layer.shadowRadius = 5
         layer.masksToBounds = false
         
-        // Setup tap gesture
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        addGestureRecognizer(tapGesture)
-        isUserInteractionEnabled = true
+        // Disable user interaction on content views
+        contentStackView.isUserInteractionEnabled = false
+        textStackView.isUserInteractionEnabled = false
+        titleLabel.isUserInteractionEnabled = false
+        subtitleLabel.isUserInteractionEnabled = false
+        descriptionLabel.isUserInteractionEnabled = false
+        smallTextLabel.isUserInteractionEnabled = false
+        chevronImageView.isUserInteractionEnabled = false
         
         // Setup content stack view
         contentStackView.axis = .horizontal
@@ -75,11 +79,18 @@ final class UICardView: UIView {
         smallTextLabel.textColor = .secondaryLabel
         textStackView.addArrangedSubview(smallTextLabel)
         
-        // Setup chevron
-        chevronImageView.image = UIImage(systemName: "chevron.right")
-        chevronImageView.tintColor = .secondaryLabel
-        chevronImageView.contentMode = .scaleAspectFit
-        contentStackView.addArrangedSubview(chevronImageView)
+        if action != nil {
+            isUserInteractionEnabled = true
+            addTarget(self, action: #selector(handleTap), for: .touchUpInside)
+            
+            // Setup chevron
+            chevronImageView.image = UIImage(systemName: "chevron.right")
+            chevronImageView.tintColor = .secondaryLabel
+            chevronImageView.contentMode = .scaleAspectFit
+            contentStackView.addArrangedSubview(chevronImageView)
+        } else {
+            isUserInteractionEnabled = false
+        }
         
         // Setup constraints
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,22 +107,21 @@ final class UICardView: UIView {
         ])
     }
     
+    // MARK: - Touch Handling
+    override var isHighlighted: Bool {
+        didSet {
+            UIView.animate(withDuration: 0.1, delay: 0, options: [.beginFromCurrentState, .allowUserInteraction]) {
+                self.transform = self.isHighlighted ? CGAffineTransform(scaleX: 0.98, y: 0.98) : .identity
+                self.layer.shadowOpacity = self.isHighlighted ? 0.3 : 0.1
+                self.layer.shadowOffset = self.isHighlighted ? CGSize(width: 0, height: 4) : CGSize(width: 0, height: 2)
+                self.layer.shadowRadius = self.isHighlighted ? 8 : 5
+            }
+        }
+    }
+    
     // MARK: - Actions
     @objc private func handleTap() {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.transform = CGAffineTransform(scaleX: 0.98, y: 0.98)
-            self.layer.shadowOpacity = 0.3
-            self.layer.shadowOffset = CGSize(width: 0, height: 4)
-            self.layer.shadowRadius = 8
-        }) { _ in
-            UIView.animate(withDuration: 0.1) {
-                self.transform = .identity
-                self.layer.shadowOpacity = 0.1
-                self.layer.shadowOffset = CGSize(width: 0, height: 2)
-                self.layer.shadowRadius = 5
-            }
-            self.action?(self.card.identifier)
-        }
+        action?(card.identifier)
     }
 }
 
@@ -123,7 +133,10 @@ final class UICardView: UIView {
             description: "This is a longer description that can span multiple lines and provide more detailed information about the card content.",
             smallText: "Additional information",
             identifier: "example"
-        )
+        ),
+        action: { identifier in
+            print("Tapped card with identifier: \(identifier)")
+        }
     )
     cardView.backgroundColor = .white
     return cardView
