@@ -101,22 +101,6 @@ final class PersonalDetailsViewController: UIViewController {
         ])
     }
 
-    private func createSectionTitle(_ title: String) -> UILabel {
-        let label = UILabel()
-        label.text = title
-        label.font = UIFont.preferredFont(forTextStyle: .title2)
-        return label
-    }
-
-    private func createSectionContent(_ text: String) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = UIFont.preferredFont(forTextStyle: .body)
-        label.textColor = .secondaryLabel
-        label.numberOfLines = 0
-        return label
-    }
-    
     private func setupSections(_ sections: [PersonalSection]) {
         // Remove existing section views
         contentStackView.arrangedSubviews
@@ -125,17 +109,22 @@ final class PersonalDetailsViewController: UIViewController {
         
         // Add new section views
         sections.forEach { section in
-            let stackView = UIStackView()
-            stackView.axis = .vertical
-            stackView.spacing = 12
-            stackView.alignment = .fill
+            let card = Card(
+                title: section.title,
+                subtitle: "",  // Empty subtitle for sections
+                description: section.content,
+                smallText: "",  // Empty small text for sections
+                identifier: section.title  // Using title as identifier
+            )
             
-            let title = createSectionTitle(section.title)
-            let content = createSectionContent(section.content)
+            let cardView = UICardView(card: card)
+            contentStackView.addArrangedSubview(cardView)
             
-            stackView.addArrangedSubview(title)
-            stackView.addArrangedSubview(content)
-            contentStackView.addArrangedSubview(stackView)
+            // Add spacing between cards
+            NSLayoutConstraint.activate([
+                cardView.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
+                cardView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor)
+            ])
         }
     }
 }
@@ -145,9 +134,7 @@ struct PersonalDetailsViewControllerRepresentable: UIViewControllerRepresentable
         return PersonalDetailsViewController()
     }
     
-    func updateUIViewController(_ uiViewController: PersonalDetailsViewController, context: Context) {
-        // Update the view controller if needed
-    }
+    func updateUIViewController(_ uiViewController: PersonalDetailsViewController, context: Context) {}
 }
 
 #Preview(traits: .sizeThatFitsLayout, body: {

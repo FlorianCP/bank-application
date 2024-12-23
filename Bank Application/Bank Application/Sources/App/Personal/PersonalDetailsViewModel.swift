@@ -44,7 +44,7 @@ final class PersonalDetailsViewModel: ObservableObject {
         // Setup sections
         sections = [
             PersonalSection(
-                title: "Persönlicher Überblick",
+                title: "Persönliches",
                 content: """
                 👨‍💻 Senior Software Engineer und T-shaped Developer mit über 13 Jahren Berufserfahrung
                 📃 Mitgründer von 4 Unternehmen
