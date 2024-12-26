@@ -14,7 +14,6 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            // Login background, info button and Raiffeisen logo
             ZStack {
                 // Login background image
                 Image("login_background")
@@ -23,7 +22,6 @@ struct LoginView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .ignoresSafeArea(.all, edges: .top)
                 
-                // VStack to control vertical alignment
                 VStack {
                     // Info button at the top
                     HStack {
@@ -41,18 +39,18 @@ struct LoginView: View {
                     
                     Spacer() // Pushes logo to bottom
                     
-                    // Raiffeisen Logo at the bottom
-                    Image("raiffeisen_logo")
+                    // Bank Logo at the bottom
+                    Image("bank_logo")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 80, height: 80)
-                        .background(Color.ciYellow)
+                        .background(Color.accentColor)
                         .cornerRadius(10)
                         .padding(.bottom, -40)
                 }
             }
             .frame(height: UIScreen.main.bounds.height / 2)
-            .background(Color.ciYellow)
+            .background(Color.accentColor)
             
             // Welcome Text
             Text("HERZLICH WILLKOMMEN")
@@ -77,8 +75,8 @@ struct LoginView: View {
                         .fontWeight(.medium)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.ciYellow)
-                        .foregroundColor(.black)
+                        .background(Color.accentColor)
+                        .foregroundColor(.white)
                 }
                 .cornerRadius(12.0)
                 
@@ -108,5 +106,10 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(isLoggedIn: .constant(false))
+    @Previewable @State var isLoggedIn = false
+    if !isLoggedIn {
+        LoginView(isLoggedIn: $isLoggedIn)
+    } else {
+        OverviewView(isLoggedIn: $isLoggedIn)
+    }
 }
