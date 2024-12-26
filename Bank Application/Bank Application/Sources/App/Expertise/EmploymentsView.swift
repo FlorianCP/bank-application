@@ -3,7 +3,7 @@ import SwiftUI
 struct EmploymentsView: View {
     @State private var employments = Employment.cvItems
     @State private var searchText = ""
-    
+    @State private var isSearching = false
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -118,7 +118,16 @@ struct EmploymentsView: View {
         }
         .listStyle(.plain)
         .navigationTitle("Berufserfahrung")
-        .searchable(text: $searchText, prompt: "Suchen...")
+        .searchable(text: $searchText, isPresented: $isSearching, prompt: "Suchen...")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    isSearching = true
+                }) {
+                    Image(systemName: "magnifyingglass")
+                }
+            }
+        }
     }
 }
 

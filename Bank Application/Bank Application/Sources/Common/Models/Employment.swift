@@ -29,7 +29,7 @@ extension Employment {
                     )
                 ],
                 tasks: [
-                    "Planung und Entwicklung eines Backends für eine GenAI application mit Langchain in Python, bestehend aus mehreren Services",
+                    "Planung und Entwicklung eines Backends für eine GenAI (Generative KI) Application mit Langchain in Python, bestehend aus mehreren Services",
                     "Erstellung und managen einer PostgreSQL Datenbank in mehreren Umgebungen (dev, staging und production), inklusive Entwicklung und Ausführung von Datenbankmigrationen sowie Installation, Setup und Benutzung von pgvector als Vektor Datenbank Extension für RAG (Retrieval Augmented Generation) für das zugrundeliegende LLM",
                     "Installation, Setup und Benutzung von pgvector als Vektor Datenbank Extension für RAG (Retrieval Augmented Generation) für das zugrundeliegende LLM",
                     "Mithilfe bei der Entwicklung eines Frontends der GenAI Anwendung in Vue.js",
