@@ -11,19 +11,45 @@ struct EmploymentsView: View {
         return formatter
     }()
     
+    private var filteredEmployments: [Employment] {
+        if searchText.isEmpty {
+            return employments
+        }
+        
+        return employments.filter { employment in
+            // Check if any tenure matches the search criteria
+            let tenureMatch = employment.tenures.contains { tenure in
+                tenure.position.localizedCaseInsensitiveContains(searchText) ||
+                tenure.company.localizedCaseInsensitiveContains(searchText) ||
+                tenure.location.localizedCaseInsensitiveContains(searchText)
+            }
+            
+            // Check if any task matches the search criteria
+            let taskMatch = employment.tasks.contains { task in
+                task.localizedCaseInsensitiveContains(searchText)
+            }
+            
+            return tenureMatch || taskMatch
+        }
+    }
+    
     var body: some View {
         List {
-            ForEach($employments) { employment in
+            ForEach(filteredEmployments) { employment in
                 VStack(alignment: .leading, spacing: 12) {
                     // Tenures
-                    ForEach(employment.wrappedValue.tenures, id: \.startDate) { tenure in
+                    ForEach(Array(employment.tenures.indices), id: \.self) { index in
+                        let tenure = employment.tenures[index]
                         VStack(alignment: .leading, spacing: 8) {
+                            if index > 0 {
+                                Text("&")
+                            }
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(tenure.position)
                                         .font(.system(size: 16, weight: .semibold))
                                     
-                                    Text(tenure.company)
+                                    Text("bei \(tenure.company)")
                                         .font(.system(size: 15, weight: .medium))
                                     
                                     HStack {
@@ -51,7 +77,7 @@ struct EmploymentsView: View {
                             .font(.system(size: 15, weight: .medium))
                             .padding(.top, 4)
                         
-                        ForEach(employment.wrappedValue.tasks, id: \.self) { task in
+                        ForEach(employment.tasks, id: \.self) { task in
                             HStack(alignment: .top) {
                                 Text("•")
                                     .font(.system(size: 14))
