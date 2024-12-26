@@ -29,6 +29,10 @@ final class PersonalDetailsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .automatic
+        
         setupUI()
         setupBindings()
         
@@ -56,7 +60,9 @@ final class PersonalDetailsViewController: UIViewController {
     
     private func setupUI() {
         title = "Persönliches"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // Set view background to clear to allow background image to show
+        view.backgroundColor = .clear
         
         // Add Background Image View
         setupBackgroundImageView()
@@ -72,11 +78,15 @@ final class PersonalDetailsViewController: UIViewController {
         // Add Avatar View
         contentStackView.addArrangedSubview(avatarView)
         setupAvatarView()
+        
+        // Extend edges
+        edgesForExtendedLayout = .all
+        extendedLayoutIncludesOpaqueBars = true
     }
     
     private func setupBackgroundImageView() {
         // Add background image view
-        view.addSubview(backgroundImageView)
+        view.insertSubview(backgroundImageView, at: 0)
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -87,9 +97,7 @@ final class PersonalDetailsViewController: UIViewController {
         
         // Add blur effect
         let blurEffect = UIBlurEffect(style: .light)
-//        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        let blurEffectView = UIVisualEffectView(effect: vibrancyEffect)
         blurEffectView.frame = backgroundImageView.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundImageView.addSubview(blurEffectView)
@@ -97,13 +105,20 @@ final class PersonalDetailsViewController: UIViewController {
     
     private func setupScrollView(_ scrollView: UIScrollView, in view: UIView) {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.alwaysBounceVertical = true
+        
+        // Extend scroll view to the edges of the view
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        // Adjust content inset for large title
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .automatic
+        }
     }
 
     private func setupAvatarView() {
@@ -122,12 +137,13 @@ final class PersonalDetailsViewController: UIViewController {
         contentStackView.distribution = .fill
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         
+        let guide = scrollView.contentLayoutGuide
         NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16),
-            contentStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            contentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
-            contentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16),
-            contentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32)
+            contentStackView.topAnchor.constraint(equalTo: guide.topAnchor, constant: 16),
+            contentStackView.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 16),
+            contentStackView.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -16),
+            contentStackView.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -16),
+            contentStackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, constant: -32)
         ])
     }
 
@@ -161,12 +177,17 @@ final class PersonalDetailsViewController: UIViewController {
 
 struct PersonalDetailsViewControllerRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> PersonalDetailsViewController {
-        return PersonalDetailsViewController()
+        let vc = PersonalDetailsViewController()
+        vc.edgesForExtendedLayout = .all
+        vc.extendedLayoutIncludesOpaqueBars = true
+        return vc
     }
     
     func updateUIViewController(_ uiViewController: PersonalDetailsViewController, context: Context) {}
 }
 
 #Preview(traits: .sizeThatFitsLayout, body: {
-    return PersonalDetailsViewController()
+    let navigationController = UINavigationController(rootViewController: UIViewController())
+    navigationController.pushViewController(PersonalDetailsViewController(), animated: false)
+    return navigationController
 })

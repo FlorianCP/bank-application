@@ -151,8 +151,22 @@ struct OverviewView: View {
                     }
                 }
             }
-            .navigationDestination(isPresented: $showingPersonalDetails) {
-                PersonalDetailsViewControllerRepresentable()
+            .sheet(isPresented: $showingPersonalDetails) {
+                NavigationStack {
+                    PersonalDetailsViewControllerRepresentable()
+                        .navigationBarTitleDisplayMode(.automatic)
+                        .navigationTitle("Persönliches")
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button(action: {
+                                    showingPersonalDetails = false
+                                }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.gray)
+                                }
+                            }
+                        }
+                }
             }
         }
     }
