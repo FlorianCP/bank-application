@@ -33,6 +33,30 @@ struct EmploymentsView: View {
         }
     }
     
+    private func highlightedText(_ text: String) -> some View {
+        if searchText.isEmpty {
+            return Text(text)
+        }
+        
+        let searchTerms = text.lowercased().ranges(of: searchText.lowercased())
+            .map { Range<String.Index>(uncheckedBounds: ($0.lowerBound, $0.upperBound)) }
+        
+        let highlights = text.lowercased().ranges(of: searchText.lowercased())
+            .reduce(Text("")) { current, range in
+                let nextText = String(text[range])
+                let previousEndIndex = searchTerms.firstIndex(of: range).map { index in
+                    index > 0 ? searchTerms[index - 1].upperBound : text.startIndex
+                } ?? text.startIndex
+                let prefix = String(text[previousEndIndex..<range.lowerBound])
+                return current + Text(prefix) + Text(nextText).foregroundColor(.accentColor).bold()
+            }
+        
+        let lastIndex = searchTerms.last?.upperBound ?? text.startIndex
+        let restString = String(text[lastIndex..<text.endIndex])
+        let rest = Text(restString)
+        return highlights + rest
+    }
+    
     var body: some View {
         List {
             ForEach(filteredEmployments) { employment in
@@ -46,14 +70,14 @@ struct EmploymentsView: View {
                             }
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text(tenure.position)
+                                    highlightedText(tenure.position)
                                         .font(.system(size: 16, weight: .semibold))
                                     
-                                    Text("bei \(tenure.company)")
+                                    highlightedText("bei \(tenure.company)")
                                         .font(.system(size: 15, weight: .medium))
                                     
                                     HStack {
-                                        Text(tenure.location)
+                                        highlightedText(tenure.location)
                                             .font(.system(size: 14))
                                             .foregroundColor(.gray)
                                         
@@ -82,7 +106,7 @@ struct EmploymentsView: View {
                                 Text("•")
                                     .font(.system(size: 14))
                                     .foregroundColor(.gray)
-                                Text(task)
+                                highlightedText(task)
                                     .font(.system(size: 14))
                                     .foregroundColor(.gray)
                             }
