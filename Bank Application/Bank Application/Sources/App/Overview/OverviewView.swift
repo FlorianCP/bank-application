@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct OverviewView: View {
     @Binding var isLoggedIn: Bool
@@ -7,6 +8,8 @@ struct OverviewView: View {
 
     private enum CardIdentifier: String {
         case expertise
+        case projects
+        case skills
         case values
         case resume
         case profile
@@ -16,39 +19,60 @@ struct OverviewView: View {
     // Sample cards data
     private let cards = [
         Card(
-            title: "Expertise",
-            subtitle: "Ein Überblick über meine Fähigkeiten",
-            description: "Erfahren Sie mehr über meine Expertise und Fähigkeiten.",
+            title: "Berufserfahrung",
+            subtitle: "Chronologische Liste aller Anstellungen",
+            description: "Erfahren Sie mehr über meine Berufserfahrung.",
             smallText: "Mehr erfahren",
-            identifier: CardIdentifier.expertise.rawValue
+            identifier: CardIdentifier.expertise.rawValue,
+            imageName: "briefcase.fill"
+        ),
+        Card(
+            title: "Projekterfahrung",
+            subtitle: "Eine Liste mit Highlights meiner Projekte",
+            description: "Erfahren Sie mehr über meine durchgeführten Projekte.",
+            smallText: "Details anzeigen",
+            identifier: CardIdentifier.projects.rawValue,
+            imageName: "folder.fill"
+        ),
+        Card(
+            title: "Skills",
+            subtitle: "Eine Liste mit meinen Skills",
+            description: "Erfahren Sie mehr über meine Fähigkeiten und Kenntnisse.",
+            smallText: "Details anzeigen",
+            identifier: CardIdentifier.skills.rawValue,
+            imageName: "star.fill"
         ),
         Card(
             title: "Persönliche Werte",
             subtitle: "Meine und Ihre Werte im Einklang",
             description: "Erhalten Sie einen Überblick über meine Werte und wie diese mit Ihren übereinstimmen.",
             smallText: "Details anzeigen",
-            identifier: CardIdentifier.values.rawValue
-        ),
-        Card(
-            title: "Lebenslauf",
-            subtitle: "Mein Lebenslauf als PDF",
-            description: "Erfahren Sie mehr über mich indem Sie meinen Lebenslauf ansehen.",
-            smallText: "Zum Lebenslauf",
-            identifier: CardIdentifier.resume.rawValue
-        ),
-        Card(
-            title: "Profil und Projekterfahrung",
-            subtitle: "Mein Profil als PDF",
-            description: "Erhalten Sie einen Überblick über meine Projekte und Erfahrungen.",
-            smallText: "Zum Profil",
-            identifier: CardIdentifier.profile.rawValue
+            identifier: CardIdentifier.values.rawValue,
+            imageName: "heart.fill"
         ),
         Card(
             title: "Persönliches",
             subtitle: "Infos über meine Person",
             description: "Erfahren Sie mehr über mich und meine persönliche Situation.",
             smallText: "Überblick erhalten",
-            identifier: CardIdentifier.personal.rawValue
+            identifier: CardIdentifier.personal.rawValue,
+            imageName: "person.text.rectangle.fill"
+        ),
+        Card(
+            title: "Lebenslauf",
+            subtitle: "Mein Lebenslauf als PDF",
+            description: "Erfahren Sie mehr über mich indem Sie meinen Lebenslauf ansehen.",
+            smallText: "Zum Lebenslauf",
+            identifier: CardIdentifier.resume.rawValue,
+            imageName: "doc.fill"
+        ),
+        Card(
+            title: "Profil und Projekterfahrung",
+            subtitle: "Mein Profil als PDF",
+            description: "Erhalten Sie einen Überblick über meine Projekte und Erfahrungen.",
+            smallText: "Zum Profil",
+            identifier: CardIdentifier.profile.rawValue,
+            imageName: "doc.fill"
         ),
     ]
     
@@ -115,10 +139,12 @@ struct OverviewView: View {
                                     guard let cardIdentifier = CardIdentifier(rawValue: identifier) else { return }
                                     switch cardIdentifier {
                                         case CardIdentifier.expertise:
-                                            // Action for card
+                                            break
+                                        case CardIdentifier.projects:
+                                            break
+                                        case CardIdentifier.skills:
                                             break
                                         case CardIdentifier.values:
-                                            // Action for card
                                             break
                                         case CardIdentifier.resume:
                                             let url = URL(string: "https://www.rath.space/Lebenslauf.pdf")!

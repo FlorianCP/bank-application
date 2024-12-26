@@ -20,7 +20,14 @@ struct CardView: View {
     
     var body: some View {
         Button(action: { action(card.identifier) }) {
-            HStack(alignment: .center) {
+            HStack(alignment: .center, spacing: 16) {
+                if let imageName = card.imageName {
+                    Image(systemName: imageName)
+                        .font(.system(size: 24))
+                        .foregroundColor(.gray)
+                        .frame(width: 32, height: 32)
+                }
+                
                 VStack(alignment: .leading, spacing: 12) {
                     Text(card.title)
                         .font(.headline)
@@ -65,7 +72,8 @@ struct CardView: View {
         subtitle: "Example Subtitle",
         description: "This is a longer description that can span multiple lines and provide more detailed information about the card content.",
         smallText: "Additional information",
-        identifier: "example"
+        identifier: "example",
+        imageName: "star.fill"
     ))
     .padding()
     .background(Color.gray.opacity(0.1))
