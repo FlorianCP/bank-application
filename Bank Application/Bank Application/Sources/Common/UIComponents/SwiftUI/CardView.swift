@@ -24,7 +24,7 @@ struct CardView: View {
                 if let imageName = card.imageName {
                     Image(systemName: imageName)
                         .font(.system(size: 24))
-                        .foregroundColor(.gray)
+                        .foregroundColor(.gray.opacity(0.7))
                         .frame(width: 32, height: 32)
                 }
                 

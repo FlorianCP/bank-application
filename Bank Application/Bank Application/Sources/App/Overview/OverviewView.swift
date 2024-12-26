@@ -5,6 +5,7 @@ struct OverviewView: View {
     @Binding var isLoggedIn: Bool
     @State private var currentPage = 0
     @State private var showingPersonalDetails = false
+    @State private var showingExpertise = false
 
     private enum CardIdentifier: String {
         case expertise
@@ -139,7 +140,7 @@ struct OverviewView: View {
                                     guard let cardIdentifier = CardIdentifier(rawValue: identifier) else { return }
                                     switch cardIdentifier {
                                         case CardIdentifier.expertise:
-                                            break
+                                            showingExpertise = true
                                         case CardIdentifier.projects:
                                             break
                                         case CardIdentifier.skills:
@@ -193,6 +194,9 @@ struct OverviewView: View {
                             }
                         }
                 }
+            }
+            .navigationDestination(isPresented: $showingExpertise) {
+                EmploymentsView()
             }
         }
     }
