@@ -4,8 +4,9 @@ import UIKit
 struct OverviewView: View {
     @Binding var isLoggedIn: Bool
     @State private var currentPage = 0
-    @State private var showingPersonalDetails = false
-    @State private var showingExpertise = false
+    @State private var isShowingPersonalDetails = false
+    @State private var isShowingExpertise = false
+    @State private var isShowingProjects = false
 
     private enum CardIdentifier: String {
         case expertise
@@ -140,9 +141,9 @@ struct OverviewView: View {
                                     guard let cardIdentifier = CardIdentifier(rawValue: identifier) else { return }
                                     switch cardIdentifier {
                                         case CardIdentifier.expertise:
-                                            showingExpertise = true
+                                            isShowingExpertise = true
                                         case CardIdentifier.projects:
-                                            break
+                                            isShowingProjects = true
                                         case CardIdentifier.skills:
                                             break
                                         case CardIdentifier.values:
@@ -154,7 +155,7 @@ struct OverviewView: View {
                                             let url = URL(string: "https://www.rath.space/Profil.pdf")!
                                             UIApplication.shared.open(url)
                                         case CardIdentifier.personal:
-                                            showingPersonalDetails = true
+                                            isShowingPersonalDetails = true
                                     }
                                 }
                             }
@@ -178,7 +179,7 @@ struct OverviewView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showingPersonalDetails) {
+            .sheet(isPresented: $isShowingPersonalDetails) {
                 NavigationStack {
                     PersonalDetailsViewControllerRepresentable()
                         .navigationBarTitleDisplayMode(.automatic)
@@ -186,7 +187,7 @@ struct OverviewView: View {
                         .toolbar {
                             ToolbarItem(placement: .navigationBarTrailing) {
                                 Button(action: {
-                                    showingPersonalDetails = false
+                                    isShowingPersonalDetails = false
                                 }) {
                                     Image(systemName: "xmark.circle.fill")
                                         .foregroundColor(.gray)
@@ -195,8 +196,11 @@ struct OverviewView: View {
                         }
                 }
             }
-            .navigationDestination(isPresented: $showingExpertise) {
+            .navigationDestination(isPresented: $isShowingExpertise) {
                 EmploymentsView()
+            }
+            .navigationDestination(isPresented: $isShowingProjects) {
+                ProjectsView()
             }
         }
     }

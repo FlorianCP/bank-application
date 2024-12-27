@@ -91,9 +91,3 @@ extension Employment {
         ]
     }
 }
-
-extension DateComponents {
-    func toDate(calendar: Calendar = .current) -> Date {
-        calendar.date(from: self) ?? Date()
-    }
-}
