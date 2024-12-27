@@ -27,44 +27,20 @@ struct ProjectsView: View {
         }
     }
     
-    private func highlightedText(_ text: String) -> some View {
-        if searchText.isEmpty {
-            return Text(text)
-        }
-        
-        let searchTerms = text.lowercased().ranges(of: searchText.lowercased())
-            .map { Range<String.Index>(uncheckedBounds: ($0.lowerBound, $0.upperBound)) }
-        
-        let highlights = text.lowercased().ranges(of: searchText.lowercased())
-            .reduce(Text("")) { current, range in
-                let nextText = String(text[range])
-                let previousEndIndex = searchTerms.firstIndex(of: range).map { index in
-                    index > 0 ? searchTerms[index - 1].upperBound : text.startIndex
-                } ?? text.startIndex
-                let prefix = String(text[previousEndIndex..<range.lowerBound])
-                return current + Text(prefix) + Text(nextText).foregroundColor(.accentColor).bold()
-            }
-        
-        let lastIndex = searchTerms.last?.upperBound ?? text.startIndex
-        let restString = String(text[lastIndex..<text.endIndex])
-        let rest = Text(restString)
-        return highlights + rest
-    }
-    
     var body: some View {
         List {
             ForEach(filteredProjects) { project in
                 VStack(alignment: .leading, spacing: 12) {
                     // Title and Company
                     VStack(alignment: .leading, spacing: 4) {
-                        highlightedText(project.title)
+                        HighlightedText(project.title, highlight: searchText)
                             .font(.system(size: 16, weight: .semibold))
                         
-                        highlightedText("für \(project.company)")
+                        HighlightedText("für \(project.company)", highlight: searchText)
                             .font(.system(size: 15, weight: .medium))
                         
                         HStack {
-                            highlightedText(project.role)
+                            HighlightedText(project.role, highlight: searchText)
                                 .font(.system(size: 14))
                                 .foregroundColor(.gray)
                             
@@ -78,7 +54,7 @@ struct ProjectsView: View {
                     }
                     
                     // Description
-                    highlightedText(project.description)
+                    HighlightedText(project.description, highlight: searchText)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                         .padding(.top, 4)
