@@ -7,6 +7,7 @@ struct OverviewView: View {
     @State private var isShowingPersonalDetails = false
     @State private var isShowingExpertise = false
     @State private var isShowingProjects = false
+    @State private var isShowingSkills = false
 
     private enum CardIdentifier: String {
         case expertise
@@ -145,7 +146,7 @@ struct OverviewView: View {
                                         case CardIdentifier.projects:
                                             isShowingProjects = true
                                         case CardIdentifier.skills:
-                                            break
+                                            isShowingSkills = true
                                         case CardIdentifier.values:
                                             break
                                         case CardIdentifier.resume:
@@ -201,6 +202,9 @@ struct OverviewView: View {
             }
             .navigationDestination(isPresented: $isShowingProjects) {
                 ProjectsView()
+            }
+            .navigationDestination(isPresented: $isShowingSkills) {
+                SkillsView()
             }
         }
     }
