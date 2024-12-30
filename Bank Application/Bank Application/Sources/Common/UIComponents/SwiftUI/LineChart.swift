@@ -41,7 +41,12 @@ struct LineChart: View {
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(12)
-        .shadow(radius: 5)
+        .shadow(
+            color: Color.black.opacity(0.1),
+            radius: 5,
+            x: 0,
+            y: 2
+        )
     }
 }
 
