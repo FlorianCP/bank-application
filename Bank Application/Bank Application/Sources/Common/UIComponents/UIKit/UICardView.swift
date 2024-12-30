@@ -27,11 +27,11 @@ final class UICardView: UIControl {
     
     // MARK: - Setup
     private func setupViews() {
-        backgroundColor = .white
+        backgroundColor = UIColor.systemBackground
         layer.cornerRadius = 12
         
         // Add shadow
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = UIColor.label.cgColor
         layer.shadowOpacity = 0.1
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowRadius = 5
@@ -138,6 +138,5 @@ final class UICardView: UIControl {
             print("Tapped card with identifier: \(identifier)")
         }
     )
-    cardView.backgroundColor = .white
     return cardView
 } 

@@ -1,11 +1,13 @@
 import SwiftUI
+import UIKit
 
 struct CustomCardButtonStyle: ButtonStyle {
+    @Environment(\.colorScheme) var colorScheme
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            // .opacity(configuration.isPressed ? 0.8 : 1.0)
             .shadow(
-                color: Color.black.opacity(configuration.isPressed ? 0.3 : 0.1),
+                color: colorScheme == .dark ? Color.white.opacity(configuration.isPressed ? 0.15 : 0.05) : Color.black.opacity(configuration.isPressed ? 0.3 : 0.1),
                 radius: configuration.isPressed ? 8 : 5,
                 x: 0,
                 y: configuration.isPressed ? 4 : 2
@@ -59,7 +61,7 @@ struct CardView: View {
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.white)
+            .background(Color(.systemBackground))
             .cornerRadius(12)
         }
         .buttonStyle(CustomCardButtonStyle())
