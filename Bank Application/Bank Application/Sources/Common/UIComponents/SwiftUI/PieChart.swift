@@ -1,16 +1,16 @@
 import SwiftUI
 import Charts
 
-struct SkillDistributionChart: View {
-    let skillCategories: [SkillCategory]
+struct PieChart: View {
+    let data: PieChartData
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Skill-Verteilung")
+            Text(data.title)
                 .font(.headline)
                 .padding(.leading)
             
-            Chart(skillCategories) { category in
+            Chart(data.values) { category in
                 Plot {
                     SectorMark(
                         angle: .value("Prozent", category.percentage),
@@ -32,7 +32,7 @@ struct SkillDistributionChart: View {
 
 #Preview {
     NavigationStack {
-        SkillDistributionChart(skillCategories: SkillCategory.sampleData)
+        PieChart(data: PieChartData.skills)
             .padding()
     }
 } 

@@ -1,17 +1,17 @@
 import SwiftUI
 import Charts
 
-struct SkillProgressChart: View {
-    let skillProgress: [SkillProgress]
+struct LineChart: View {
+    let data: LineChartData
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Skill-Entwicklung über Zeit")
+            Text(data.title)
                 .font(.headline)
                 .padding(.leading)
             
             Chart {
-                ForEach(skillProgress) { skill in
+                ForEach(data.values) { skill in
                     ForEach(skill.progressPoints) { point in
                         LineMark(
                             x: .value("Datum", point.date),
@@ -47,7 +47,7 @@ struct SkillProgressChart: View {
 
 #Preview {
     NavigationStack {
-        SkillProgressChart(skillProgress: SkillProgress.sampleData)
+        LineChart(data: LineChartData.skillDevelopment)
             .padding()
     }
 } 
