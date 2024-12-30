@@ -25,7 +25,7 @@ struct LineChart: View {
             }
             .frame(height: 300)
             .chartXAxis {
-                AxisMarks(values: .stride(by: .year)) { value in
+                AxisMarks(values: .automatic) { value in
                     AxisGridLine()
                     AxisValueLabel(format: .dateTime.year())
                 }
