@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct RootView: View {
-    @State private var isLoggedIn = false
+    @StateObject private var store = AppStore.shared
     
     var body: some View {
         Group {
-            if isLoggedIn {
-                OverviewView(isLoggedIn: $isLoggedIn)
+            if store.isLoggedIn {
+                OverviewView()
             } else {
-                LoginView(isLoggedIn: $isLoggedIn)
+                LoginView()
             }
         }
     }

@@ -1,13 +1,9 @@
 import SwiftUI
 
 struct OverviewView: View {
-    @Binding var isLoggedIn: Bool
+    @StateObject private var store = AppStore.shared
     @State private var currentPage = 0
-    @State private var isShowingPersonalDetails = false
-    @State private var isShowingExpertise = false
-    @State private var isShowingProjects = false
-    @State private var isShowingSkills = false
-
+    
     private enum CardIdentifier: String {
         case expertise
         case projects
@@ -130,22 +126,22 @@ struct OverviewView: View {
                                 CardView(card: card) { identifier in
                                     guard let cardIdentifier = CardIdentifier(rawValue: identifier) else { return }
                                     switch cardIdentifier {
-                                        case CardIdentifier.expertise:
-                                            isShowingExpertise = true
-                                        case CardIdentifier.projects:
-                                            isShowingProjects = true
-                                        case CardIdentifier.skills:
-                                            isShowingSkills = true
-                                        case CardIdentifier.values:
+                                        case .expertise:
+                                            store.dispatch(.setDetailScreen(.expertise))
+                                        case .projects:
+                                            store.dispatch(.setDetailScreen(.projects))
+                                        case .skills:
+                                            store.dispatch(.setDetailScreen(.skills))
+                                        case .values:
                                             break
-                                        case CardIdentifier.resume:
+                                        case .resume:
                                             let url = URL(string: "https://www.rath.space/Lebenslauf.pdf")!
                                             UIApplication.shared.open(url)
-                                        case CardIdentifier.profile:
+                                        case .profile:
                                             let url = URL(string: "https://www.rath.space/Profil.pdf")!
                                             UIApplication.shared.open(url)
-                                        case CardIdentifier.personal:
-                                            isShowingPersonalDetails = true
+                                        case .personal:
+                                            store.dispatch(.setDetailScreen(.personalDetails))
                                     }
                                 }
                             }
@@ -162,14 +158,17 @@ struct OverviewView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        isLoggedIn = false
+                        store.dispatch(.setLoggedIn(false))
                     }) {
                         Image(systemName: "rectangle.portrait.and.arrow.right")
                             .foregroundColor(.red)
                     }
                 }
             }
-            .sheet(isPresented: $isShowingPersonalDetails) {
+            .sheet(isPresented: .init(
+                get: { store.currentDetailScreen == .personalDetails },
+                set: { if !$0 { store.dispatch(.setDetailScreen(.none)) } }
+            )) {
                 NavigationStack {
                     PersonalDetailsViewControllerRepresentable()
                         .navigationBarTitleDisplayMode(.automatic)
@@ -177,7 +176,7 @@ struct OverviewView: View {
                         .toolbar {
                             ToolbarItem(placement: .navigationBarTrailing) {
                                 Button(action: {
-                                    isShowingPersonalDetails = false
+                                    store.dispatch(.setDetailScreen(.none))
                                 }) {
                                     Image(systemName: "xmark.circle.fill")
                                         .foregroundColor(.gray)
@@ -186,13 +185,22 @@ struct OverviewView: View {
                         }
                 }
             }
-            .navigationDestination(isPresented: $isShowingExpertise) {
+            .navigationDestination(isPresented: .init(
+                get: { store.currentDetailScreen == .expertise },
+                set: { if !$0 { store.dispatch(.setDetailScreen(.none)) } }
+            )) {
                 EmploymentsView()
             }
-            .navigationDestination(isPresented: $isShowingProjects) {
+            .navigationDestination(isPresented: .init(
+                get: { store.currentDetailScreen == .projects },
+                set: { if !$0 { store.dispatch(.setDetailScreen(.none)) } }
+            )) {
                 ProjectsView()
             }
-            .navigationDestination(isPresented: $isShowingSkills) {
+            .navigationDestination(isPresented: .init(
+                get: { store.currentDetailScreen == .skills },
+                set: { if !$0 { store.dispatch(.setDetailScreen(.none)) } }
+            )) {
                 SkillsView()
             }
         }
@@ -200,5 +208,5 @@ struct OverviewView: View {
 }
 
 #Preview {
-    OverviewView(isLoggedIn: .constant(true))
+    OverviewView()
 }

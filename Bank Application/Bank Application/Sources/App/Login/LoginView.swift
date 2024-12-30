@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @State private var showAlert = false
     @State private var showInfoAlert = false
-    @Binding var isLoggedIn: Bool
+    @StateObject private var store = AppStore.shared
     
     var body: some View {
         VStack {
@@ -69,7 +69,7 @@ struct LoginView: View {
             // Login Buttons
             VStack(spacing: 15) {
                 Button(action: {
-                    isLoggedIn = true
+                    store.dispatch(.setLoggedIn(true))
                 }) {
                     Text("FLORIAN RATH'S BEWERBUNG ANSEHEN")
                         .fontWeight(.medium)
@@ -106,10 +106,10 @@ struct LoginView: View {
 }
 
 #Preview {
-    @Previewable @State var isLoggedIn = false
-    if !isLoggedIn {
-        LoginView(isLoggedIn: $isLoggedIn)
+    @Previewable @StateObject var store = AppStore.shared
+    if store.isLoggedIn {
+        LoginView()
     } else {
-        OverviewView(isLoggedIn: $isLoggedIn)
+        OverviewView()
     }
 }
