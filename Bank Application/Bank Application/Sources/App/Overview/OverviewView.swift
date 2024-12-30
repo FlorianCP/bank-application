@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 
 struct OverviewView: View {
     @Binding var isLoggedIn: Bool
@@ -100,17 +99,7 @@ struct OverviewView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                // Background Image
-                Image("login_background")
-                    .resizable()
-                    .scaledToFill()
-                    .blur(radius: 20)
-                    .opacity(0.25)
-                    .ignoresSafeArea()
-                    .frame(width: UIScreen.main.bounds.width)
-                
-                // Content
+            BackgroundView {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
                         // News ScrollView with paging

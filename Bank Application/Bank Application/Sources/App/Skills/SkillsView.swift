@@ -3,16 +3,18 @@ import Charts
 
 struct SkillsView: View {
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                LineChart(data: LineChartData.skillDevelopment)
-                PieChart(data: PieChartData.skills)
-                PieChart(data: PieChartData.languages)
+        BackgroundView {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    LineChart(data: LineChartData.skillDevelopment)
+                    PieChart(data: PieChartData.skills)
+                    PieChart(data: PieChartData.languages)
+                }
+                .padding()
             }
-            .padding()
+            .navigationTitle("Skills")
+            .navigationBarTitleDisplayMode(.large)
         }
-        .navigationTitle("Skills")
-        .navigationBarTitleDisplayMode(.large)
     }
 }
 
