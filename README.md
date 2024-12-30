@@ -54,11 +54,11 @@ Bank Application/
 
 Die Anwendung zeigt mehrere interessante architektonische und technische Ansätze:
 
-- **State Management**: Eine saubere, von Flux/Redux inspirierte Implementierung von State Management mit einem zentralisierten [`AppStore`](Sources/Common/Services/Store/AppStore.swift), der den gesamten Anwendungszustand verwaltet. Der Store folgt einem unidirektionalen Datenfluss mit Actions, Reducer und state updates, wodurch die Zustandsänderungen der App vorhersehbar und leicht zu debuggen sind. Siehe die [Navigationserweiterung](Sources/Common/Services/Store/AppStore+OverviewView.swift) als Beispiel für die Erweiterbarkeit des Stores.
+- **State Management**: Eine saubere, von Flux/Redux inspirierte Implementierung von State Management mit einem zentralisierten [`AppStore`](Bank%20Application/Bank%20Application/Sources/Common/Services/Store/AppStore.swift), der den gesamten Anwendungszustand verwaltet. Der Store folgt einem unidirektionalen Datenfluss mit Actions, Reducer und state updates, wodurch die Zustandsänderungen der App vorhersehbar und leicht zu debuggen sind. Siehe die [Navigationserweiterung](Bank%20Application/Bank%20Application/Sources/Common/Services/Store/AppStore+OverviewView.swift) als Beispiel für die Erweiterbarkeit des Stores.
 
-- **State Observation**: Ein [AppStateListener](Sources/Common/Services/AppStateListener.swift), der Combine verwendet, um reaktiv auf Zustandsänderungen zu reagieren, besonders nützlich für Analytics und Side-Effects.
+- **State Observation**: Ein [AppStateListener](Bank%20Application/Bank%20Application/Sources/Common/Services/AppStateListener.swift), der Combine verwendet, um reaktiv auf Zustandsänderungen zu reagieren, besonders nützlich für Analytics und Side-Effects.
 
-- **Navigation State Management**: Sauberes Handling des Navigationszustands durch den [`AppStore`](Sources/Common/Services/Store/AppStore.swift):
+- **Navigation State Management**: Sauberes Handling des Navigationszustands durch den [`AppStore`](Bank%20Application/Bank%20Application/Sources/Common/Services/Store/AppStore.swift):
 
   - Zentralisiertes Navigation State Management
   - Type-safe Navigation mittels Enums
@@ -67,10 +67,10 @@ Die Anwendung zeigt mehrere interessante architektonische und technische Ansätz
 
 - **Datenvisualisierung**: Umfangreiche Nutzung von Swift Charts für schöne Datenvisualisierung:
 
-  - [`LineChart`](Sources/Common/UIComponents/SwiftUI/LineChart.swift): Wird verwendet, um die Entwicklung von Fähigkeiten über die Zeit anzuzeigen (siehe [SkillsView](Sources/App/Skills/SkillsView.swift))
-  - [`PieChart`](Sources/Common/UIComponents/SwiftUI/PieChart.swift): Wird verwendet, um die Verteilung von Fähigkeiten und Expertisebereichen anzuzeigen (siehe [SkillsView](Sources/App/Skills/SkillsView.swift))
+  - [`LineChart`](Bank%20Application/Bank%20Application/Sources/Common/UIComponents/SwiftUI/LineChart.swift): Wird verwendet, um die Entwicklung von Fähigkeiten über die Zeit anzuzeigen (siehe [SkillsView](Bank%20Application/Bank%20Application/Sources/App/Skills/SkillsView.swift))
+  - [`PieChart`](Bank%20Application/Bank%20Application/Sources/Common/UIComponents/SwiftUI/PieChart.swift): Wird verwendet, um die Verteilung von Fähigkeiten und Expertisebereiche anzuzeigen (siehe [SkillsView](Bank%20Application/Bank%20Application/Sources/App/Skills/SkillsView.swift))
 
-- **Erweiterte Suchfunktionalität**: Ausgefeilte Suchimplementierung in Ansichten wie [`EmploymentsView`](Sources/App/Expertise/EmploymentsView.swift) und [`ProjectsView`](Sources/App/Projects/ProjectsView.swift) mit:
+- **Erweiterte Suchfunktionalität**: Ausgefeilte Suchimplementierung in Ansichten wie [`EmploymentsView`](Bank%20Application/Bank%20Application/Sources/App/Expertise/EmploymentsView.swift) und [`ProjectsView`](Bank%20Application/Bank%20Application/Sources/App/Projects/ProjectsView.swift) mit:
 
   - Echtzeit-Filterung über mehrere Datenfelder
   - Groß-/Kleinschreibung-unabhängige Suche
@@ -78,7 +78,7 @@ Die Anwendung zeigt mehrere interessante architektonische und technische Ansätz
   - Hervorgehobene Suchergebnisse in der Benutzeroberfläche
 
 - **Hybrider UI-Ansatz**: Obwohl die App hauptsächlich mit SwiftUI gebaut wurde, demonstriert sie die Integration von UIKit-Komponenten wo nötig.
-  Zum Beispiel zeigt der [PersonalDetailsViewController](Sources/App/Personal/PersonalDetailsViewController.swift), wie man einen
+  Zum Beispiel zeigt der [PersonalDetailsViewController](Bank%20Application/Bank%20Application/Sources/App/Personal/PersonalDetailsViewController.swift), wie man einen
   UIKit-View-Controller in SwiftUI mittels UIViewControllerRepresentable einbindet.
 
 ## Getting Started
