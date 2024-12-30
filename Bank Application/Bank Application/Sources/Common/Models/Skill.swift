@@ -9,7 +9,6 @@ struct LineChartData: Identifiable {
     struct LineChartSlice: Identifiable {
         let id = UUID()
         let skillName: String
-        let color: String // Color name that can be used with Color(...)
         let progressPoints: [ProgressPoint]
         
         struct ProgressPoint: Identifiable {
@@ -33,35 +32,43 @@ struct PieChartData: Identifiable {
     }
 }
 
-// Sample Data
 extension LineChartData {
-    static let skillDevelopment = LineChartData(title: "Skill-Entwicklung", values: [
+    static let skillDevelopment = LineChartData(title: "Programmiersprachen Entwicklung", values: [
+        LineChartSlice(
+            skillName: "Objective C",
+            progressPoints: [
+                .init(date: Calendar.current.date(from: DateComponents(year: 2007))!, level: 0),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2012))!, level: 60),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2024))!, level: 45),
+            ]),
         LineChartSlice(
             skillName: "Swift",
-            color: "blue",
             progressPoints: [
-                .init(date: Calendar.current.date(from: DateComponents(year: 2020, month: 1))!, level: 20),
-                .init(date: Calendar.current.date(from: DateComponents(year: 2021, month: 6))!, level: 45),
-                .init(date: Calendar.current.date(from: DateComponents(year: 2022, month: 12))!, level: 75),
-                .init(date: Calendar.current.date(from: DateComponents(year: 2024, month: 3))!, level: 90)
+                .init(date: Calendar.current.date(from: DateComponents(year: 2015))!, level: 0),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2018))!, level: 45),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2023))!, level: 80),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2024))!, level: 80),
             ]),
         LineChartSlice(
-            skillName: "SwiftUI",
-            color: "green",
+            skillName: "TS / JS",
             progressPoints: [
-                .init(date: Calendar.current.date(from: DateComponents(year: 2021, month: 1))!, level: 10),
-                .init(date: Calendar.current.date(from: DateComponents(year: 2022, month: 6))!, level: 40),
-                .init(date: Calendar.current.date(from: DateComponents(year: 2023, month: 12))!, level: 70),
-                .init(date: Calendar.current.date(from: DateComponents(year: 2024, month: 3))!, level: 85)
+                .init(date: Calendar.current.date(from: DateComponents(year: 2007))!, level: 10),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2016))!, level: 60),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2023))!, level: 55),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2024))!, level: 85)
             ]),
         LineChartSlice(
-            skillName: "UIKit",
-            color: "red",
+            skillName: "Python",
             progressPoints: [
-                .init(date: Calendar.current.date(from: DateComponents(year: 2020, month: 1))!, level: 30),
-                .init(date: Calendar.current.date(from: DateComponents(year: 2021, month: 6))!, level: 55),
-                .init(date: Calendar.current.date(from: DateComponents(year: 2022, month: 12))!, level: 80),
-                .init(date: Calendar.current.date(from: DateComponents(year: 2024, month: 3))!, level: 95)
+                .init(date: Calendar.current.date(from: DateComponents(year: 2022))!, level: 0),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2024))!, level: 75)
+            ]),
+        LineChartSlice(
+            skillName: "PHP",
+            progressPoints: [
+                .init(date: Calendar.current.date(from: DateComponents(year: 2007))!, level: 30),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2016))!, level: 75),
+                .init(date: Calendar.current.date(from: DateComponents(year: 2024))!, level: 55)
             ])
     ])
 }
@@ -85,19 +92,23 @@ extension PieChartData {
     ])
 }
 
-#Preview {
+#Preview("Skill Development") {
     NavigationStack {
-        ScrollView {
-            VStack {
-                LineChart(data: LineChartData.skillDevelopment)
-                    .padding()
-                
-                PieChart(data: PieChartData.skills)
-                    .padding()
-                
-                PieChart(data: PieChartData.languages)
-                    .padding()
-            }
-        }
+        LineChart(data: LineChartData.skillDevelopment)
+            .padding()
+    }
+}
+
+#Preview("Skills") {
+    NavigationStack {
+        PieChart(data: PieChartData.skills)
+            .padding()
+    }
+}
+
+#Preview("Languages") {
+    NavigationStack {
+        PieChart(data: PieChartData.languages)
+            .padding()
     }
 }
