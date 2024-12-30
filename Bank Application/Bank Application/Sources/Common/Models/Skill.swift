@@ -28,7 +28,6 @@ struct PieChartData: Identifiable {
         let id = UUID()
         let name: String
         let percentage: Double
-        let color: String // Color name that can be used with Color(...)
     }
 }
 
@@ -75,20 +74,20 @@ extension LineChartData {
 
 extension PieChartData {
     static let skills = PieChartData(title: "Skills", values: [
-        PieChartSlice(name: "iOS Development", percentage: 40, color: "blue"),
-        PieChartSlice(name: "Fullstack", percentage: 20, color: "green"),
-        PieChartSlice(name: "Backend Development", percentage: 25, color: "orange"),
-        PieChartSlice(name: "Project Management", percentage: 15, color: "purple")
+        PieChartSlice(name: "iOS Development", percentage: 40),
+        PieChartSlice(name: "Fullstack", percentage: 20),
+        PieChartSlice(name: "Backend Development", percentage: 25),
+        PieChartSlice(name: "Project Management", percentage: 15)
     ])
 }
 
 extension PieChartData {
     static let languages = PieChartData(title: "Programmiersprachen", values: [
-        PieChartSlice(name: "Swift", percentage: 45, color: "blue"),
-        PieChartSlice(name: "ObjC", percentage: 15, color: "orange"),
-        PieChartSlice(name: "TS / JS", percentage: 25, color: "green"),
-        PieChartSlice(name: "Python", percentage: 20, color: "purple"),
-        PieChartSlice(name: "PHP", percentage: 20, color: "purple"),
+        PieChartSlice(name: "Swift", percentage: 45),
+        PieChartSlice(name: "ObjC", percentage: 15),
+        PieChartSlice(name: "TS / JS", percentage: 25),
+        PieChartSlice(name: "Python", percentage: 20),
+        PieChartSlice(name: "PHP", percentage: 20)
     ])
 }
 
