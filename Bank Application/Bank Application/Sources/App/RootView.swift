@@ -5,11 +5,14 @@ struct RootView: View {
     
     var body: some View {
         Group {
-            if store.isLoggedIn {
+            if store.state.isLoggedIn {
                 OverviewView()
             } else {
                 LoginView()
             }
+        }
+        .onAppear {
+            AppStateListener.shared.startListening()
         }
     }
 }
