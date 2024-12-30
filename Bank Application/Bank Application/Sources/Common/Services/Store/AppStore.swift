@@ -14,12 +14,13 @@ enum DetailScreen: Equatable {
 
 // MARK: - State
 
-struct AppState: Equatable {
+struct AppState: Equatable, Sendable {
     var currentDetailScreen: DetailScreen = .none
     var isLoggedIn: Bool = false
 }
 
-final class AppStore: ObservableObject {
+@MainActor
+final class AppStore: ObservableObject, Sendable {
     
     // MARK: - Singleton
     
@@ -33,7 +34,7 @@ final class AppStore: ObservableObject {
     
     // MARK: - Actions
     
-    enum Action {
+    enum Action: Sendable {
         case setDetailScreen(DetailScreen)
         case setLoggedIn(Bool)
     }

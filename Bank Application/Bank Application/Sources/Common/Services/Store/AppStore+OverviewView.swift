@@ -11,6 +11,7 @@ extension AppStore {
     
     enum Overview {
         
+        @MainActor
         static var isShowingPersonalDetails: Binding<Bool> {
             Binding(
                 get: { AppStore.shared.state.currentDetailScreen == .personalDetails },
@@ -25,6 +26,7 @@ extension AppStore {
             )
         }
         
+        @MainActor
         static var isShowingExpertise: Binding<Bool> {
             Binding(
                 get: { AppStore.shared.state.currentDetailScreen == .expertise },
@@ -39,6 +41,7 @@ extension AppStore {
             )
         }
         
+        @MainActor
         static var isShowingProjects: Binding<Bool> {
             Binding(
                 get: { AppStore.shared.state.currentDetailScreen == .projects },
@@ -53,6 +56,7 @@ extension AppStore {
             )
         }
         
+        @MainActor
         static var isShowingSkills: Binding<Bool> {
             Binding(
                 get: { AppStore.shared.state.currentDetailScreen == .skills },
@@ -67,6 +71,7 @@ extension AppStore {
             )
         }
         
+        @MainActor
         static var isShowingValues: Binding<Bool> {
             Binding(
                 get: { AppStore.shared.state.currentDetailScreen == .values },

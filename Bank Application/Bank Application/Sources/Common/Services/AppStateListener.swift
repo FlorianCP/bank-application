@@ -7,7 +7,8 @@
 
 import Combine
 
-final class AppStateListener {
+@MainActor
+final class AppStateListener: Sendable {
     
     // MARK: - Singleton
     
