@@ -7,6 +7,7 @@ enum DetailScreen: Equatable {
     case expertise
     case projects
     case skills
+    case values
 }
 
 final class AppStore: ObservableObject {
@@ -22,7 +23,6 @@ final class AppStore: ObservableObject {
     
     // MARK: - Action Handler
     func dispatch(_ action: Action) {
-        print("Dispatched action: \(action)")
         switch action {
         case .setDetailScreen(let screen):
             currentDetailScreen = screen

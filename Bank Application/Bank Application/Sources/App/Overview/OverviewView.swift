@@ -126,22 +126,22 @@ struct OverviewView: View {
                                 CardView(card: card) { identifier in
                                     guard let cardIdentifier = CardIdentifier(rawValue: identifier) else { return }
                                     switch cardIdentifier {
-                                        case .expertise:
-                                            store.dispatch(.setDetailScreen(.expertise))
-                                        case .projects:
-                                            store.dispatch(.setDetailScreen(.projects))
-                                        case .skills:
-                                            store.dispatch(.setDetailScreen(.skills))
-                                        case .values:
-                                            break
-                                        case .resume:
-                                            let url = URL(string: "https://www.rath.space/Lebenslauf.pdf")!
-                                            UIApplication.shared.open(url)
-                                        case .profile:
-                                            let url = URL(string: "https://www.rath.space/Profil.pdf")!
-                                            UIApplication.shared.open(url)
-                                        case .personal:
-                                            store.dispatch(.setDetailScreen(.personalDetails))
+                                    case .expertise:
+                                        store.dispatch(.setDetailScreen(.expertise))
+                                    case .projects:
+                                        store.dispatch(.setDetailScreen(.projects))
+                                    case .skills:
+                                        store.dispatch(.setDetailScreen(.skills))
+                                    case .values:
+                                        store.dispatch(.setDetailScreen(.values))
+                                    case .resume:
+                                        let url = URL(string: "https://www.rath.space/Lebenslauf.pdf")!
+                                        UIApplication.shared.open(url)
+                                    case .profile:
+                                        let url = URL(string: "https://www.rath.space/Profil.pdf")!
+                                        UIApplication.shared.open(url)
+                                    case .personal:
+                                        store.dispatch(.setDetailScreen(.personalDetails))
                                     }
                                 }
                             }
@@ -190,6 +190,9 @@ struct OverviewView: View {
             }
             .navigationDestination(isPresented: AppStore.Overview.isShowingSkills) {
                 SkillsView()
+            }
+            .navigationDestination(isPresented: AppStore.Overview.isShowingValues) {
+                ValuesView()
             }
         }
     }

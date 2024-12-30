@@ -66,5 +66,19 @@ extension AppStore {
                 }
             )
         }
+        
+        static var isShowingValues: Binding<Bool> {
+            Binding(
+                get: { AppStore.shared.currentDetailScreen == .values },
+                set: {
+                    if $0 && AppStore.shared.currentDetailScreen != .values {
+                        AppStore.shared.dispatch(.setDetailScreen(.values))
+                    }
+                    if !$0 && AppStore.shared.currentDetailScreen == .values {
+                        AppStore.shared.dispatch(.setDetailScreen(.none))
+                    }
+                }
+            )
+        }
     }
 }
