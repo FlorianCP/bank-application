@@ -165,10 +165,7 @@ struct OverviewView: View {
                     }
                 }
             }
-            .sheet(isPresented: .init(
-                get: { store.currentDetailScreen == .personalDetails },
-                set: { if !$0 { store.dispatch(.setDetailScreen(.none)) } }
-            )) {
+            .sheet(isPresented: AppStore.Overview.isShowingPersonalDetails) {
                 NavigationStack {
                     PersonalDetailsViewControllerRepresentable()
                         .navigationBarTitleDisplayMode(.automatic)
@@ -185,22 +182,13 @@ struct OverviewView: View {
                         }
                 }
             }
-            .navigationDestination(isPresented: .init(
-                get: { store.currentDetailScreen == .expertise },
-                set: { if !$0 { store.dispatch(.setDetailScreen(.none)) } }
-            )) {
+            .navigationDestination(isPresented: AppStore.Overview.isShowingExpertise) {
                 EmploymentsView()
             }
-            .navigationDestination(isPresented: .init(
-                get: { store.currentDetailScreen == .projects },
-                set: { if !$0 { store.dispatch(.setDetailScreen(.none)) } }
-            )) {
+            .navigationDestination(isPresented: AppStore.Overview.isShowingProjects) {
                 ProjectsView()
             }
-            .navigationDestination(isPresented: .init(
-                get: { store.currentDetailScreen == .skills },
-                set: { if !$0 { store.dispatch(.setDetailScreen(.none)) } }
-            )) {
+            .navigationDestination(isPresented: AppStore.Overview.isShowingSkills) {
                 SkillsView()
             }
         }
