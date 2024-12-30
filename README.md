@@ -18,27 +18,27 @@ Dieser Ansatz demonstriert nicht nur meine technischen Fähigkeiten in der iOS-E
 
 ## Screenshots
 
-<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px; gap: 20px;">
     <img src="screenshots/sc1_light.png" width="240" alt="Screenshot 1 Light Mode">
     <img src="screenshots/sc1_dark.png" width="240" alt="Screenshot 1 Dark Mode">
 </div>
 
-<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px; gap: 20px;">
     <img src="screenshots/sc2_light.png" width="240" alt="Screenshot 2 Light Mode">
     <img src="screenshots/sc2_dark.png" width="240" alt="Screenshot 2 Dark Mode">
 </div>
 
-<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px; gap: 20px;">
     <img src="screenshots/sc3_light.png" width="240" alt="Screenshot 3 Light Mode">
     <img src="screenshots/sc3_dark.png" width="240" alt="Screenshot 3 Dark Mode">
 </div>
 
-<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px; gap: 20px;">
     <img src="screenshots/sc4_light.png" width="240" alt="Screenshot 4 Light Mode">
     <img src="screenshots/sc4_dark.png" width="240" alt="Screenshot 4 Dark Mode">
 </div>
 
-<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+<div style="display: flex; justify-content: space-between; margin-bottom: 40px; gap: 20px;">
     <img src="screenshots/sc5_light.png" width="240" alt="Screenshot 5 Light Mode">
     <img src="screenshots/sc5_dark.png" width="240" alt="Screenshot 5 Dark Mode">
 </div>
