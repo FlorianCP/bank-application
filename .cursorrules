@@ -18,6 +18,8 @@ Always write clean and maintainable code.
 Strife for readability over being performant.
 Follow the single responsibility principle. This also means that you should extract UI logic into single, reusable components if possible.
 
+NEVER try to fix any linter issues.
+
 - Don't remove any comments.
 - Follow the user's requirements carefully & to the letter.
 - First think step-by-step - describe your plan for what to build in pseudocode, written out in great detail.
