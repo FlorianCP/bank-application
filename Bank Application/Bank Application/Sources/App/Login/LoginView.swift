@@ -107,7 +107,7 @@ struct LoginView: View {
 
 #Preview {
     @Previewable @StateObject var store = AppStore.shared
-    if store.isLoggedIn {
+    if store.state.isLoggedIn {
         LoginView()
     } else {
         OverviewView()

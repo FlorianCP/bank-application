@@ -13,12 +13,12 @@ extension AppStore {
         
         static var isShowingPersonalDetails: Binding<Bool> {
             Binding(
-                get: { AppStore.shared.currentDetailScreen == .personalDetails },
+                get: { AppStore.shared.state.currentDetailScreen == .personalDetails },
                 set: {
-                    if $0 && AppStore.shared.currentDetailScreen != .personalDetails {
+                    if $0 && AppStore.shared.state.currentDetailScreen != .personalDetails {
                         AppStore.shared.dispatch(.setDetailScreen(.personalDetails))
                     }
-                    if !$0 && AppStore.shared.currentDetailScreen == .personalDetails {
+                    if !$0 && AppStore.shared.state.currentDetailScreen == .personalDetails {
                         AppStore.shared.dispatch(.setDetailScreen(.none))
                     }
                 }
@@ -27,12 +27,12 @@ extension AppStore {
         
         static var isShowingExpertise: Binding<Bool> {
             Binding(
-                get: { AppStore.shared.currentDetailScreen == .expertise },
+                get: { AppStore.shared.state.currentDetailScreen == .expertise },
                 set: {
-                    if $0 && AppStore.shared.currentDetailScreen != .expertise {
+                    if $0 && AppStore.shared.state.currentDetailScreen != .expertise {
                         AppStore.shared.dispatch(.setDetailScreen(.expertise))
                     }
-                    if !$0 && AppStore.shared.currentDetailScreen == .expertise {
+                    if !$0 && AppStore.shared.state.currentDetailScreen == .expertise {
                         AppStore.shared.dispatch(.setDetailScreen(.none))
                     }
                 }
@@ -41,12 +41,12 @@ extension AppStore {
         
         static var isShowingProjects: Binding<Bool> {
             Binding(
-                get: { AppStore.shared.currentDetailScreen == .projects },
+                get: { AppStore.shared.state.currentDetailScreen == .projects },
                 set: {
-                    if $0 && AppStore.shared.currentDetailScreen != .projects {
+                    if $0 && AppStore.shared.state.currentDetailScreen != .projects {
                         AppStore.shared.dispatch(.setDetailScreen(.projects))
                     }
-                    if !$0 && AppStore.shared.currentDetailScreen == .projects {
+                    if !$0 && AppStore.shared.state.currentDetailScreen == .projects {
                         AppStore.shared.dispatch(.setDetailScreen(.none))
                     }
                 }
@@ -55,12 +55,12 @@ extension AppStore {
         
         static var isShowingSkills: Binding<Bool> {
             Binding(
-                get: { AppStore.shared.currentDetailScreen == .skills },
+                get: { AppStore.shared.state.currentDetailScreen == .skills },
                 set: {
-                    if $0 && AppStore.shared.currentDetailScreen != .skills {
+                    if $0 && AppStore.shared.state.currentDetailScreen != .skills {
                         AppStore.shared.dispatch(.setDetailScreen(.skills))
                     }
-                    if !$0 && AppStore.shared.currentDetailScreen == .skills {
+                    if !$0 && AppStore.shared.state.currentDetailScreen == .skills {
                         AppStore.shared.dispatch(.setDetailScreen(.none))
                     }
                 }
@@ -69,12 +69,12 @@ extension AppStore {
         
         static var isShowingValues: Binding<Bool> {
             Binding(
-                get: { AppStore.shared.currentDetailScreen == .values },
+                get: { AppStore.shared.state.currentDetailScreen == .values },
                 set: {
-                    if $0 && AppStore.shared.currentDetailScreen != .values {
+                    if $0 && AppStore.shared.state.currentDetailScreen != .values {
                         AppStore.shared.dispatch(.setDetailScreen(.values))
                     }
-                    if !$0 && AppStore.shared.currentDetailScreen == .values {
+                    if !$0 && AppStore.shared.state.currentDetailScreen == .values {
                         AppStore.shared.dispatch(.setDetailScreen(.none))
                     }
                 }

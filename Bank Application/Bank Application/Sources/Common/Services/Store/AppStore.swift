@@ -1,6 +1,8 @@
 import Combine
 import Foundation
 
+// MARK: - DetailScreen Enum
+
 enum DetailScreen: Equatable {
     case none
     case personalDetails
@@ -10,29 +12,61 @@ enum DetailScreen: Equatable {
     case values
 }
 
+// MARK: - State
+
+struct AppState: Equatable {
+    var currentDetailScreen: DetailScreen = .none
+    var isLoggedIn: Bool = false
+}
+
 final class AppStore: ObservableObject {
+    
+    // MARK: - Singleton
+    
+    static let shared = AppStore()
+    
+    private init() {}
+    
     // MARK: - Published State
-    @Published private(set) var currentDetailScreen: DetailScreen = .none
-    @Published private(set) var isLoggedIn: Bool = false
+    
+    @Published private(set) var state: AppState = AppState()
     
     // MARK: - Actions
+    
     enum Action {
         case setDetailScreen(DetailScreen)
         case setLoggedIn(Bool)
     }
     
-    // MARK: - Action Handler
-    func dispatch(_ action: Action) {
+    // MARK: - Reducer
+    
+    private func reduce(_ action: Action) -> AppState {
+        var newState = state
+
         switch action {
         case .setDetailScreen(let screen):
-            currentDetailScreen = screen
+            newState.currentDetailScreen = screen
         case .setLoggedIn(let isLoggedIn):
-            self.isLoggedIn = isLoggedIn
+            newState.isLoggedIn = isLoggedIn
         }
+        
+        return newState
+    }
+    
+    // MARK: - Action Handler
+
+    func dispatch(_ action: Action) {
+        state = reduce(action)
     }
 }
 
-// MARK: - Singleton Instance
+// MARK: - Scoped Publishers
+
 extension AppStore {
-    static let shared = AppStore()
-} 
+    var isLoggedInPublisher: AnyPublisher<Bool, Never> {
+        $state
+            .map(\.isLoggedIn)
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+    }
+}
