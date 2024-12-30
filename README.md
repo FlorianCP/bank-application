@@ -16,6 +16,33 @@ Die App behält die vertraute Benutzeroberfläche und Navigationsmuster einer Ba
 
 Dieser Ansatz demonstriert nicht nur meine technischen Fähigkeiten in der iOS-Entwicklung, sondern zeigt auch mein Verständnis für das Produkt, Liebe zum Detail und kreative Problemlösungsfähigkeiten. Ich möchte damit dem/der Personalverantwortlichen eine einprägsame und relevante Demonstration meiner Fähigkeiten bieten.
 
+## Screenshots
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <img src="screenshots/sc1_light.png" width="240" alt="Screenshot 1 Light Mode">
+    <img src="screenshots/sc1_dark.png" width="240" alt="Screenshot 1 Dark Mode">
+</div>
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <img src="screenshots/sc2_light.png" width="240" alt="Screenshot 2 Light Mode">
+    <img src="screenshots/sc2_dark.png" width="240" alt="Screenshot 2 Dark Mode">
+</div>
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <img src="screenshots/sc3_light.png" width="240" alt="Screenshot 3 Light Mode">
+    <img src="screenshots/sc3_dark.png" width="240" alt="Screenshot 3 Dark Mode">
+</div>
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <img src="screenshots/sc4_light.png" width="240" alt="Screenshot 4 Light Mode">
+    <img src="screenshots/sc4_dark.png" width="240" alt="Screenshot 4 Dark Mode">
+</div>
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <img src="screenshots/sc5_light.png" width="240" alt="Screenshot 5 Light Mode">
+    <img src="screenshots/sc5_dark.png" width="240" alt="Screenshot 5 Dark Mode">
+</div>
+
 ## Tech Stack
 
 - **UI Framework**: SwiftUI (mit integriertem UIKit zur Demonstration)
@@ -97,6 +124,7 @@ Die Anwendung zeigt mehrere interessante architektonische und technische Ansätz
 - Saubere und wartbare Codestruktur
 - Moderne SwiftUI-Praktiken
 - Responsive und adaptive Benutzeroberfläche
+- Unterstützung von Light- und Dark-Mode
 - Deutschsprachige Benutzeroberfläche
 - Englische Codebasis
 
