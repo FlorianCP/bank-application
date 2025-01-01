@@ -157,10 +157,10 @@ final class PersonalDetailsViewController: UIViewController {
         sections.forEach { section in
             let card = Card(
                 title: section.title,
-                subtitle: "",  // Empty subtitle for sections
+                subtitle: "",
                 description: section.content,
-                smallText: "",  // Empty small text for sections
-                identifier: section.title  // Using title as identifier
+                smallText: "",
+                identifier: section.title
             )
             
             let cardView = UICardView(card: card)
