@@ -16,6 +16,10 @@ Die App behält die vertraute Benutzeroberfläche und Navigationsmuster einer Ba
 
 Dieser Ansatz demonstriert nicht nur meine technischen Fähigkeiten in der iOS-Entwicklung, sondern zeigt auch mein Verständnis für das Produkt, Liebe zum Detail und kreative Problemlösungsfähigkeiten. Ich möchte damit dem/der Personalverantwortlichen eine einprägsame und relevante Demonstration meiner Fähigkeiten bieten.
 
+## Testing
+
+Interessierte können einen [`Test Flight Build`](https://testflight.apple.com/join/pypwm4fw) installieren.
+
 ## Screenshots
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 40px; gap: 20px;">
