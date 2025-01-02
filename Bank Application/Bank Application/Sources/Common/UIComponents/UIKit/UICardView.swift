@@ -2,6 +2,8 @@ import UIKit
 
 final class UICardView: UIControl {
     // MARK: - Properties
+    static let bulletPoint = "•"
+    
     private let card: Card
     private var action: ((String) -> Void)?
     
@@ -72,6 +74,43 @@ final class UICardView: UIControl {
         descriptionLabel.font = .preferredFont(forTextStyle: .body)
         descriptionLabel.textColor = .label
         descriptionLabel.numberOfLines = 0
+        
+        // Configure paragraph style for proper bullet point alignment
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 8
+        paragraphStyle.paragraphSpacing = 8
+        paragraphStyle.alignment = .left
+        
+        // Add tab stop for creating columns
+        let tabStop = NSTextTab(textAlignment: .left, location: 24)
+        paragraphStyle.tabStops = [tabStop]
+        paragraphStyle.defaultTabInterval = 24
+        
+        // Process the text to add tabs between bullet points and content
+        var didFindBulletPoint = false
+        let processedText = card.description.components(separatedBy: .newlines).map { line -> String in
+            let trimmedLine = line.trimmingCharacters(in: .whitespaces)
+            if trimmedLine.hasPrefix(UICardView.bulletPoint) {
+                didFindBulletPoint = true
+                let textAfterBullet = trimmedLine.dropFirst().trimmingCharacters(in: .whitespaces)
+                return "\(UICardView.bulletPoint)\t\(textAfterBullet)"
+            }
+            return line
+        }.joined(separator: "\n")
+        
+        if didFindBulletPoint {
+            paragraphStyle.headIndent = 24
+        }
+        
+        descriptionLabel.attributedText = NSAttributedString(
+            string: processedText,
+            attributes: [
+                .paragraphStyle: paragraphStyle,
+                .font: UIFont.preferredFont(forTextStyle: .body),
+                .foregroundColor: UIColor.label
+            ]
+        )
+        
         textStackView.addArrangedSubview(descriptionLabel)
         
         smallTextLabel.text = card.smallText
@@ -140,3 +179,19 @@ final class UICardView: UIControl {
     )
     return cardView
 } 
+
+#Preview(traits: .fixedLayout(width: 300, height: 200)) {
+    let cardView = UICardView(
+        card: Card(
+            title: "Example Title",
+            subtitle: "Example Subtitle",
+            description: "\(UICardView.bulletPoint) First bullet point\n\(UICardView.bulletPoint) Second bullet point\n\(UICardView.bulletPoint) Third bullet point\nThis is a longer description that can span multiple lines and provide more detailed information about the card content.",
+            smallText: "Additional information",
+            identifier: "example"
+        ),
+        action: { identifier in
+            print("Tapped card with identifier: \(identifier)")
+        }
+    )
+    return cardView
+}
