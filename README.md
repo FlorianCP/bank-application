@@ -20,6 +20,10 @@ Dieser Ansatz demonstriert nicht nur meine technischen Fähigkeiten in der iOS-E
 
 Interessierte können einen [`Test Flight Build`](https://testflight.apple.com/join/pypwm4fw) installieren.
 
+<div align="center">
+  <img src="qrcode-testflight.png" width="200" alt="TestFlight QR Code">
+</div>
+
 ## Screenshots
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 40px; gap: 20px;">
