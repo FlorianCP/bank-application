@@ -120,7 +120,7 @@ Die Anwendung zeigt mehrere interessante architektonische und technische Ansätz
 
 1. Repository klonen
 2. `Bank Application.xcodeproj` in Xcode öffnen
-3. Projekt erstellen und ausführen (⌘+R)
+3. Projekt builden und ausführen (⌘+R)
 
 ## Anforderungen
 
